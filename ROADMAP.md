@@ -15,10 +15,12 @@ A native Nintendo Switch homebrew save editor for Pokémon (Gen 8 & 9) — no PC
 - [x] **Dual-File Commit:** Writes to both `main` and `backup` simultaneously to prevent stale-file fallbacks.
 - [x] **Forensic Verification:** 0 diffs between main/backup, stride mathematically proven.
 
-## 🔧 Ready to Ship — v0.9.1 (The Final Hardware Gate)
-*Target Release: Immediate*
+## ✅ Shipped — v0.9.1 (Hardware Validation)
+*End-to-end on-console verification with photographic proof. Phase 1 closed.*
 
-- [ ] **Final Hardware Validation Pass:** Complete end-to-end on-console verification of the clone/delete/commit loop before the first public release.
+- [x] **Final Hardware Validation Pass:** Full on-console verification of the clone/delete/commit loop.
+- [x] **Native-Format Box Delete:** Delete writes the exact empty-slot encoding the game itself uses, for perfectly clean round trips.
+- [x] **Box Storage Verification:** Slot layout and encryption verified against the game's own autosaves for 100% round-trip fidelity.
 
 ## 🟡 Coming Next — v1.0.0 (The Multi-Game & Content Expansion)
 *Target Release: Late 2026*
