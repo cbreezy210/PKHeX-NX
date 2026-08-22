@@ -16,7 +16,9 @@ A native Nintendo Switch homebrew save editor for Pokémon (Gen 8 & 9) — no PC
 - [x] **Forensic Verification:** 0 diffs between main/backup, stride mathematically proven.
 
 ## 🔧 Ready to Ship — v0.9.1 (The Final Hardware Gate)
-- [ ] **3-Photo Verification Cycle:** Final hardware proof of the clone/delete/commit loop to close Phase 1.
+*Target Release: Immediate*
+
+- [ ] **Final Hardware Validation Pass:** Complete end-to-end on-console verification of the clone/delete/commit loop before the first public release.
 
 ## 🟡 Coming Next — v1.0.0 (The Multi-Game & Content Expansion)
 *Target Release: Late 2026*
@@ -31,7 +33,7 @@ A native Nintendo Switch homebrew save editor for Pokémon (Gen 8 & 9) — no PC
 - [ ] **SD Name Tables:** `species.txt`, `items.txt`, `moves.txt`, `abilities.txt` parsed into vectors at boot.
 - [ ] **Native Keyboard Search:** Press (+) to open swkbd and instantly search the databases by name.
 - [ ] **Bag Editor:** Parse and edit the item block with a visual slot picker.
-- [ ] **Legalize Button:** Adjusts OT/TID/HT/memories for Home/online play safety.
+- [ ] **Advanced Legality Validation:** Legalize button that aligns OT/TID/HT/memories and runs deep legality checks so edited Pokémon stay safe for HOME and online play.
 - [ ] **Sanity Checks & Safe Mode:** Prevents impossible values, restricts edits to offline-safe limits.
 
 ## 🟠 Mid-Term — v1.1.0 (The "ACNH Treatment" UI Overhaul)
@@ -48,7 +50,8 @@ A native Nintendo Switch homebrew save editor for Pokémon (Gen 8 & 9) — no PC
 - [ ] **Game Version Validator:** Warn if save offsets don't match the current game patch.
 - [ ] **Crash Logging:** Write a `crash.log` to the SD card on unrecoverable errors.
 
-### 🎒 Quality of Life
+### 🎒 Quality of Life & Automation
+- [ ] **"Living Dex" Smart Automator:** Scans the Pokédex for missing entries and generates a wishlist — or auto-injects legal `.pk9` templates — to complete your dex.
 - [ ] **Box Loadouts (Y):** Save/load named box snapshots (team sets, living-dex starters) to SD.
 - [ ] **Favorites (X):** One-button `.pk9` preset injects (6IV Ditto, competitive starters).
 - [ ] **Batch Operations:** Max IVs, set nature, or legalize an entire box at once.
