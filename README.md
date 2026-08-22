@@ -5,6 +5,8 @@ A 100% native Nintendo Switch homebrew application for editing Pokémon save fil
 > **⚠️ STATUS: IN ACTIVE DEVELOPMENT**
 > The core engine, cryptography, and safety features are fully built and forensically verified. The multi-game framework and graphical UI are currently in development. Watch this repo for the first public release!
 
+**🚀 Coming in v1.0.0:** Scarlet + Violet + Legends: Z-A support, SD name tables with native keyboard search, and advanced legality validation.
+
 ![Version](https://img.shields.io/badge/version-WIP-orange)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
@@ -37,7 +39,7 @@ See [ROADMAP.md](ROADMAP.md) for the full list of shipped engine features and pl
 | **B** | Back / Cancel |
 | **X** | Clone selected Pokémon |
 | **Y** | Delete selected Pokémon |
-| **ZL** | Inject from `.pk9` / Emergency Rollback |
+| **ZL** | Inject from `.pk9` (box viewer) / Emergency rollback (main menu) |
 | **ZR** | Export to `.pk9` |
 | **L / R** | Change Box |
 | **+** | Exit App |
