@@ -3,7 +3,7 @@
 A 100% native Nintendo Switch homebrew application for editing Pokémon save files (Gen 8 & Gen 9) directly on your console. No PC, no pulling the SD card, no complicated dumping tools required.
 
 > **⚠️ STATUS: IN ACTIVE DEVELOPMENT**
-> The core engine, cryptography, and safety features are fully built and forensically verified. The multi-game framework and graphical UI are currently in development. Watch this repo for the first public release!
+> The core engine, cryptography, and safety features are fully built, forensically verified, and hardware-validated on-console (v0.9.1). The multi-game framework and graphical UI are currently in development. Watch this repo for the first public release!
 
 **🚀 Coming in v1.0.0:** Scarlet + Violet + Legends: Z-A support, SD name tables with native keyboard search, and advanced legality validation.
 
@@ -25,6 +25,7 @@ A 100% native Nintendo Switch homebrew application for editing Pokémon save fil
     *   **Delete:** Permanently remove a Pokémon from a slot.
     *   **Export:** Save any box Pokémon to a `.pk9` file on your SD card.
 *   **Stat & Trait Editor:** Modify IVs, EVs, Natures, Tera Types, and Force Shiny statuses with automatic checksum healing.
+*   **Hardware-Validated Round Trips:** Every box operation verified end-to-end against the game's own autosave format — clean renders, zero ghost artifacts.
 
 ## 🗺️ Roadmap
 
