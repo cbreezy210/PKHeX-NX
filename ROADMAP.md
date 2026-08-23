@@ -4,7 +4,7 @@ A native Nintendo Switch homebrew save editor for Pokémon (Gen 8 & 9) — no PC
 ---
 
 ## ✅ Shipped — v0.9.0 (The Core Engine & Scarlet Foundation)
-*The math, the cryptography, and the safety nets. Forensically verified against hardware.*
+The math, the cryptography, and the safety nets. Forensically verified against hardware.
 
 - [x] **SwishCrypto Engine:** SHA256 footer, 127-byte xorpad, SCBlock/SCXorShift32 port.
 - [x] **Trainer Mapping:** ID, Name, Money editing with 4-step safety-gated NAND commit.
@@ -16,26 +16,34 @@ A native Nintendo Switch homebrew save editor for Pokémon (Gen 8 & 9) — no PC
 - [x] **Forensic Verification:** 0 diffs between main/backup, stride mathematically proven.
 
 ## ✅ Shipped — v0.9.1 (Hardware Validation)
-*End-to-end on-console verification with photographic proof. Phase 1 closed.*
+End-to-end on-console verification with photographic proof. Phase 1 closed.
 
 - [x] **Final Hardware Validation Pass:** Full on-console verification of the clone/delete/commit loop.
 - [x] **Native-Format Box Delete:** Delete writes the exact empty-slot encoding the game itself uses, for perfectly clean round trips.
 - [x] **Box Storage Verification:** Slot layout and encryption verified against the game's own autosaves for 100% round-trip fidelity.
 
+## ✅ Shipped — v0.9.2 (Multi-Game Framework & Database Generator)
+The editor grows beyond a single save. Phase 2 core closed.
+
+- [x] **Boot-Time Game Selector:** Auto-detects installed Scarlet & Violet saves with manual override.
+- [x] **Violet Support:** Full PK9 stack validated on a second title.
+- [x] **Database Generator:** Mint any species on-console with computed stats, chosen ball, moves, and trainer metadata — renders cleanly in-game.
+- [x] **26-Ball Picker:** Complete ball roster with correct in-game ball IDs.
+- [x] **Native Keyboard Search:** swkbd species search across all 960 box slots.
+- [x] **Base-Stat Engine:** Real per-species base stats parsed from SD assets for accurate stat computation.
+
 ## 🟡 Coming Next — v1.0.0 (The Multi-Game & Content Expansion)
 *Target Release: Late 2026*
 
 ### 🌍 Multi-Game Framework
-- [ ] **Boot-time Game Selector:** Probes Title IDs, lists installed saves, manual override.
-- [ ] **Violet Support:** Reuses PK9 stack (TID `0x01008F6008C5E000`).
 - [ ] **Legends: Z-A Support:** PK9 codec reuse with Z-A specific block keys.
 - [ ] **Sword/Shield, BDSP, Legends: Arceus:** PK8, PB8, and PA8 codec ports.
 
 ### 📖 Data & Content
-- [ ] **SD Name Tables:** `species.txt`, `items.txt`, `moves.txt`, `abilities.txt` parsed into vectors at boot.
-- [ ] **Native Keyboard Search:** Press (+) to open swkbd and instantly search the databases by name.
+- [ ] **Learnset-Aware Move Picker:** Only moves a species can legally learn.
+- [ ] **SD Name Tables:** `items.txt`, `moves.txt`, `abilities.txt` parsed into vectors at boot.
 - [ ] **Bag Editor:** Parse and edit the item block with a visual slot picker.
-- [ ] **Advanced Legality Validation:** Legalize button that aligns OT/TID/HT/memories and runs deep legality checks so edited Pokémon stay safe for HOME and online play.
+- [ ] **Advanced Legality Validation:** Legalize button that alignes OT/TID/HT/memories and runs deep legality checks so edited Pokémon stay safe for HOME and online play.
 - [ ] **Sanity Checks & Safe Mode:** Prevents impossible values, restricts edits to offline-safe limits.
 
 ## 🟠 Mid-Term — v1.1.0 (The "ACNH Treatment" UI Overhaul)
