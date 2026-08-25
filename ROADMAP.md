@@ -32,6 +32,17 @@ The editor grows beyond a single save. Phase 2 core closed.
 - [x] **Native Keyboard Search:** swkbd species search across all 960 box slots.
 - [x] **Base-Stat Engine:** Real per-species base stats parsed from SD assets for accurate stat computation.
 
+## ✅ Shipped — v0.9.3 (Full Legality Generator)
+Every generated Pokémon is now 100% legal, level-accurate, and matches the game's internal data tables.
+
+- [x] **Real Abilities:** Each species gets one of its legal abilities (Ability 1, Ability 2, or Hidden) with correct ID and bitflag.
+- [x] **Level-Accurate Moves:** Generator reads each species' real level-up learnset and picks the 4 most recent moves.
+- [x] **Correct Max PP:** Per-move PP values sourced from the game's move data tables.
+- [x] **Level Picker:** Choose any level from 1 to 100 for the generated Pokémon.
+- [x] **Egg Generation:** Toggle to create a valid egg (level 1, egg flag set, correct hatch cycles, level-1 moveset).
+- [x] **Growth-Correct EXP:** All 6 experience curves (Med Fast / Erratic / Fluctuating / Med Slow / Fast / Slow) implemented per-species — no more level drift.
+- [x] **Embedded Homebrew Icon:** Custom Poké Ball + hexagon + circuit logo displayed in the Homebrew Menu.
+
 ## 🟡 Coming Next — v1.0.0 (The Multi-Game & Content Expansion)
 *Target Release: Late 2026*
 
@@ -40,7 +51,7 @@ The editor grows beyond a single save. Phase 2 core closed.
 - [ ] **Sword/Shield, BDSP, Legends: Arceus:** PK8, PB8, and PA8 codec ports.
 
 ### 📖 Data & Content
-- [ ] **Learnset-Aware Move Picker:** Only moves a species can legally learn.
+- [ ] **Legal Move Picker:** Hand-pick the 4 equipped moves from each species' full legal pool (level-up + TM + egg).
 - [ ] **SD Name Tables:** `items.txt`, `moves.txt`, `abilities.txt` parsed into vectors at boot.
 - [ ] **Bag Editor:** Parse and edit the item block with a visual slot picker.
 - [ ] **Advanced Legality Validation:** Legalize button that alignes OT/TID/HT/memories and runs deep legality checks so edited Pokémon stay safe for HOME and online play.
