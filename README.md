@@ -1,13 +1,10 @@
 # 🎮 PKHeX-NX (Native Switch Pokémon Save Editor)
-A 100% native Nintendo Switch homebrew application for editing Pokémon save files (Gen 8 & Gen 9) directly on your console. No PC, no pulling the SD card, no complicated dumping tools required.
+A 100% native Nintendo Switch homebrew application for editing Pokémon save files (Gen 9: Scarlet & Violet) directly on your console. No PC, no pulling the SD card, no complicated dumping tools required.
 
 > **⚠️ STATUS: IN ACTIVE DEVELOPMENT**
-> The core engine, cryptography, and safety features are fully built, forensically verified, and hardware-validated on-console (v0.9.2). Scarlet **and** Violet are supported with a boot-time game selector. The graphical UI and deeper legality tooling are in development. Watch this repo for the first public release!
+> The core engine, cryptography, and safety features are fully built, forensically verified, and hardware-validated on-console (v0.9.3). The graphical UI is currently in development. Watch this repo for the first public release!
 
-**🚀 Coming in v1.0.0:** Legends: Z-A + Gen 8 support (Sword/Shield, BDSP, Arceus), bag editor, learnset-aware move picker, and advanced legality validation.
-
-![Version](https://img.shields.io/badge/version-v0.9.2-green)
-![License](https://img.shields.io/badge/license-MIT-blue)
+**🚀 Coming in v1.0.0:** Scarlet + Violet + Legends: Z-A support, legal move picker, bag editor, and advanced legality validation.
 
 ## ✨ Core Features (Engine Complete)
 - **Native Switch Execution:** Edits the decrypted save data directly in RAM and writes back to the NAND securely.
@@ -18,8 +15,13 @@ A 100% native Nintendo Switch homebrew application for editing Pokémon save fil
   - One-button emergency rollback to the newest backup.
 - **SwishCrypto Engine:** Fully ported SHA256 footer verification, 127-byte xorpad decryption, and SCBlock/SCXorShift32 parsing.
 - **PK9 Codec:** Native decryption, block-shuffling, and re-encryption for Pokémon Scarlet/Violet.
-- **Database Generator:** Mint any species on-console with computed stats, chosen ball (26-ball roster), moves, and trainer metadata.
-- **Native Keyboard Search:** swkbd species search across all 960 box slots.
+- **Legality-Aware Database Generator:**
+  - Mint any species with real abilities (Ability 1 / 2 / Hidden).
+  - Level-accurate moves pulled from each species' real level-up learnset.
+  - Correct max PP per move.
+  - Growth-correct EXP across all 6 experience curves.
+  - Optional egg generation (valid egg flag, hatch cycles, level-1 moveset).
+  - 26-ball picker with correct in-game ball IDs.
 - **Comprehensive Box Toolkit:**
   - **Inject:** Load `.pk9` files directly from your SD card.
   - **Clone:** Duplicate any Pokémon to another box slot.
@@ -42,7 +44,7 @@ See [ROADMAP.md](ROADMAP.md) for the full list of shipped engine features and pl
 | **ZL** | Inject from `.pk9` (box viewer) / Emergency rollback (main menu) |
 | **ZR** | Export to `.pk9` |
 | **L / R** | Change Box |
-| **+** | Search species (box viewer) / Change game (main menu) |
+| **+** | Search species / Change game |
 
 ## 🛠️ Building from Source
 *Source code and release binaries will be available in the first public drop. Requires [devkitPro](https://devkitpro.org/) with `switch-dev` installed.*
