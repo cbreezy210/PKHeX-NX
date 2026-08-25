@@ -49,6 +49,13 @@ See [ROADMAP.md](ROADMAP.md) for the full list of shipped engine features and pl
 ## 🛠️ Building from Source
 *Source code and release binaries will be available in the first public drop. Requires [devkitPro](https://devkitpro.org/) with `switch-dev` installed.*
 
+## 🧪 Generating SD Assets (Developers)
+The generator reads per-species data tables from the SD card at `sdmc:/pkhex-nx-assets/`. To build them, run the bundled script against a local [PKHeX](https://github.com/kwsch/PKHeX) source checkout:
+
+`py tools/make_assets.py <path-to-pkhex-ref> <output-dir>`
+
+This produces `stats.txt`, `abilities.txt`, `growth.txt`, `learnsets.bin`, and `pp.txt`. Copy those (plus your `species.txt` name table) into `sdmc:/pkhex-nx-assets/` on the SD card.
+
 ## ⚠️ Disclaimer
 This is an educational project. Modifying save data always carries a risk. While PKHeX-NX features a robust backup and safety-net system, **always keep your own manual backups**. I am not responsible for corrupted saves, lost Pokémon, or banned consoles. Use at your own risk!
 
