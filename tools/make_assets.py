@@ -7,6 +7,7 @@ OUTD = sys.argv[2] if len(sys.argv) > 2 else r"C:\switchdev\dumps"
 personal = os.path.join(BASE, "PKHeX.Core", "Resources", "byte", "personal", "personal_sv")
 levelup  = os.path.join(BASE, "PKHeX.Core", "Resources", "byte", "levelup", "lvlmove_sv.pkl")
 moveinfo = os.path.join(BASE, "PKHeX.Core", "Moves", "MoveInfo9.cs")
+moves_txt = os.path.join(BASE, "PKHeX.Core", "Resources", "text", "other", "en", "text_Moves_en.txt")
 
 data = open(personal, 'rb').read()
 
@@ -49,4 +50,15 @@ nums = re.findall(r'\b(\d+)\b', m.group(1))
 with open(os.path.join(OUTD,"pp.txt"),"w") as f:
     f.write(" ".join(nums))
 
-print("Wrote stats.txt, abilities.txt, growth.txt, learnsets.bin, pp.txt to", OUTD)
+# NEW: moves.txt (move names, index = move ID)
+# Read with utf-8 to handle the weird dashes correctly
+moves = open(moves_txt, encoding="utf-8").read().splitlines()
+with open(os.path.join(OUTD,"moves.txt"),"w", encoding="utf-8") as f:
+    # Replace the weird em-dash at index 0 with "---" for a cleaner UI
+    for i, name in enumerate(moves):
+        if i == 0 and not name.isalnum():
+            f.write("---\n")
+        else:
+            f.write(name + "\n")
+
+print(f"Wrote stats, abilities, growth, learnsets, pp, and moves ({len(moves)} total) to", OUTD)
