@@ -31,7 +31,7 @@ SOURCES     := source
 INCLUDES    := include
 
 APP_TITLE   := PKHeX-NX
-APP_AUTHOR  := You
+APP_AUTHOR  := cbreezy210
 APP_VERSION := 0.9.3
 #---------------------------------------------------------------------------------
 
