@@ -53,11 +53,17 @@ See [ROADMAP.md](ROADMAP.md) for the full list of shipped engine features and pl
 | **+** | Search species / Change game |
 
 ## 🛠️ Building from Source
-Requires `devkitPro` with `switch-dev` installed.
+Requires `devkitPro` with `switch-dev` (libnx) installed.
 
 ```bash
+git clone https://github.com/cbreezy210/PKHeX-NX.git
+cd PKHeX-NX
 make
 ```
+
+This produces `PKHeX-NX.nro`. The build is fully self-contained — **no game data dumps or extra files are required to compile.**
+
+> ℹ️ **Note for developers:** All species / move / stat data is loaded **at runtime** from `sdmc:/pkhex-nx-assets/` (see the "Generating SD Assets" section below). The `romfs/*.dat` embedding rules in the Makefile are legacy leftovers from an earlier design and are **not** part of the build — you can safely ignore them.
 
 ## 🧪 Generating SD Assets (Developers)
 The generator reads per-species data tables from the SD card at `sdmc:/pkhex-nx-assets/`. To build them, run the bundled script against a local PKHeX source checkout:
