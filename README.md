@@ -1,5 +1,10 @@
 # 🎮 PKHeX-NX (Native Switch Pokémon Save Editor)
 
+> ⚠️ **CRITICAL LAUNCH INSTRUCTION: USE TITLE OVERRIDE**
+> You **MUST** launch PKHeX-NX via **Title Override** (hold the **[R]** button while launching an installed game like *Pokémon Scarlet* or *Violet*).
+> 
+> Do **NOT** launch this app from the Album / Applet Mode. Applet Mode restricts memory access and will cause the app to fail to mount your save files or crash on startup.
+
 A 100% native Nintendo Switch homebrew application for editing Pokémon save files (Gen 9: Scarlet & Violet) directly on your console. No PC, no pulling the SD card, no complicated dumping tools required.
 
 > ⚠️ **STATUS: ACTIVE DEVELOPMENT (v0.9.3)**  
