@@ -83,18 +83,6 @@ $(OUTPUT).elf: $(OFILES)
 	@echo linking $(notdir $@)
 	@$(LD) $(LDFLAGS) $(OFILES) $(LIBPATHS) $(LIBS) -o $@
 
-main_dat.o: $(TOPDIR)/romfs/main.dat
-	@echo embedding $(notdir $<)
-	@cd $(TOPDIR)/romfs && $(OBJCOPY) -I binary -O elf64-littleaarch64 -B aarch64 main.dat $(CURDIR)/main_dat.o
-
-mainHeader_dat.o: $(TOPDIR)/romfs/mainHeader.dat
-	@echo embedding $(notdir $<)
-	@cd $(TOPDIR)/romfs && $(OBJCOPY) -I binary -O elf64-littleaarch64 -B aarch64 mainHeader.dat $(CURDIR)/mainHeader_dat.o
-
-landname_dat.o: $(TOPDIR)/romfs/landname.dat
-	@echo embedding $(notdir $<)
-	@cd $(TOPDIR)/romfs && $(OBJCOPY) -I binary -O elf64-littleaarch64 -B aarch64 landname.dat $(CURDIR)/landname_dat.o
-
 %.o: %.cpp
 	@echo compiling $(notdir $<)
 	@$(CXX) -MMD -MP $(CXXFLAGS) $(INCLUDE) -c $< -o $@
@@ -110,10 +98,3 @@ landname_dat.o: $(TOPDIR)/romfs/landname.dat
 -include $(DEPENDS)
 
 endif
-personal_dat.o: $(TOPDIR)/romfs/personal.dat
-	@echo embedding $(notdir $<)
-	@cd $(TOPDIR)/romfs && $(OBJCOPY) -I binary -O elf64-littleaarch64 -B aarch64 personal.dat $(CURDIR)/personal_dat.o
-
-personalHeader_dat.o: $(TOPDIR)/romfs/personalHeader.dat
-	@echo embedding $(notdir $<)
-	@cd $(TOPDIR)/romfs && $(OBJCOPY) -I binary -O elf64-littleaarch64 -B aarch64 personalHeader.dat $(CURDIR)/personalHeader_dat.o
