@@ -32,11 +32,11 @@ The editor grows beyond a single save. Phase 2 core closed.
 - [x] **Native Keyboard Search:** swkbd species search across all 960 box slots.
 - [x] **Base-Stat Engine:** Real per-species base stats parsed from SD assets for accurate stat computation.
 
-## ✅ Shipped — v0.9.3 (Full Legality Generator)
-Every generated Pokémon is now 100% legal, level-accurate, and matches the game's internal data tables.
+## ✅ Shipped — v0.9.3 (Full Legality Generator + Manual Move Picker)
+Every generated Pokémon is now 100% legal, level-accurate, and fully customizable.
 
 - [x] **Real Abilities:** Each species gets one of its legal abilities (Ability 1, Ability 2, or Hidden) with correct ID and bitflag.
-- [x] **Level-Accurate Moves:** Generator reads each species' real level-up learnset and picks the 4 most recent moves.
+- [x] **Manual Legal Move Picker (M11):** Press [Y] in the generator to hand-pick up to 4 moves from the species' full legal learnset at or below the chosen level. Displays real move names parsed from `moves.txt`.
 - [x] **Correct Max PP:** Per-move PP values sourced from the game's move data tables.
 - [x] **Level Picker:** Choose any level from 1 to 100 for the generated Pokémon.
 - [x] **Egg Generation:** Toggle to create a valid egg (level 1, egg flag set, correct hatch cycles, level-1 moveset).
@@ -51,10 +51,9 @@ Every generated Pokémon is now 100% legal, level-accurate, and matches the game
 - [ ] **Sword/Shield, BDSP, Legends: Arceus:** PK8, PB8, and PA8 codec ports.
 
 ### 📖 Data & Content
-- [ ] **Legal Move Picker:** Hand-pick the 4 equipped moves from each species' full legal pool (level-up + TM + egg).
-- [ ] **SD Name Tables:** `items.txt`, `moves.txt`, `abilities.txt` parsed into vectors at boot.
+- [ ] **SD Name Tables:** `items.txt` parsed into vectors at boot for Bag Editor.
 - [ ] **Bag Editor:** Parse and edit the item block with a visual slot picker.
-- [ ] **Advanced Legality Validation:** Legalize button that alignes OT/TID/HT/memories and runs deep legality checks so edited Pokémon stay safe for HOME and online play.
+- [ ] **Advanced Legality Validation:** Legalize button that aligns OT/TID/HT/memories and runs deep legality checks so edited Pokémon stay safe for HOME and online play.
 - [ ] **Sanity Checks & Safe Mode:** Prevents impossible values, restricts edits to offline-safe limits.
 
 ## 🟠 Mid-Term — v1.1.0 (The "ACNH Treatment" UI Overhaul)
