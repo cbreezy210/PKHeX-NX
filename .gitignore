@@ -1,8 +1,16 @@
-   build/
-   *.o
-   *.d
-   *.elf
-   *.nacp
-   *.nro
-   *.pfs0
-   *.npdm
+# Build artifacts
+build/
+*.o
+*.d
+*.map
+*.elf
+*.nro
+*.nacp
+
+# Local-only data
+romfs/
+
+# OS junk
+Thumbs.db
+Desktop.ini
+.DS_Store
