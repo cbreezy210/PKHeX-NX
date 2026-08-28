@@ -470,7 +470,7 @@ struct Sha256 {
         else { buf[i++]=0x80; while(i<64) buf[i++]=0; transform(buf); memset(buf,0,56); }
         bitlen += (u64)datalen*8;
         buf[63]=(u8)bitlen; buf[62]=(u8)(bitlen>>8); buf[61]=(u8)(bitlen>>16); buf[60]=(u8)(bitlen>>24);
-        buf[59]=(u8)(bitlen>>32); buf[58]=(u8)(bitlen>>40); buf[57]=(u8)(bitlen>>48); buf[56]=(u8)(bitlen>>56);
+        buf[59]=(u8)bitlen>>32; buf[58]=(u8)(bitlen>>40); buf[57]=(u8)(bitlen>>48); buf[56]=(u8)(bitlen>>56);
         transform(buf);
         for(int j=0;j<8;j++){ out[j*4]=(u8)(h[j]>>24); out[j*4+1]=(u8)(h[j]>>16); out[j*4+2]=(u8)(h[j]>>8); out[j*4+3]=(u8)h[j]; } }
 };
@@ -1207,6 +1207,34 @@ static int gameSelector(){
 
 int main(int argc, char** argv){
     consoleInit(NULL); appletLockExit();
+    padConfigureInput(1, HidNpadStyleSet_NpadStandard); // <--- HID input initialized before guard
+    // ---- Applet Mode guard: refuse to run without Title Override ----
+    if (appletGetAppletType() != AppletType_Application) {
+        PadState guard_pad;
+        padInitializeDefault(&guard_pad);
+        consoleClear();
+        printf("\n\n  !! LAUNCH ERROR !!\n\n");
+        printf("  PKHeX-NX was launched from the Album (Applet Mode).\n");
+        printf("  This mode blocks save-file access.\n\n");
+        printf("  HOW TO FIX:\n");
+        printf("  1. Return to the Home Menu.\n");
+        printf("  2. Highlight Pokemon Scarlet or Violet.\n");
+        printf("  3. HOLD [R] while pressing [A] to launch it.\n");
+        printf("  4. PKHeX-NX will open with full access.\n\n");
+        printf("  Press [A] to exit.\n");
+        consoleUpdate(NULL); // Flush initial text to screen
+        
+        while (appletMainLoop()) {
+            padUpdate(&guard_pad);
+            if (padGetButtonsDown(&guard_pad) & HidNpadButton_A) break;
+            consoleUpdate(NULL); // Flushes text while waiting
+            svcSleepThread(16000000); // Don't burn CPU while waiting
+        }
+        appletUnlockExit();
+        consoleExit(NULL);
+        return 0;
+    }
+    // ---- end guard ----
     Result rc = fsInitialize();
     if (R_FAILED(rc)){ printf("FATAL fs 0x%X\n",rc); while(appletMainLoop()) consoleUpdate(NULL); return 1; }
     fsdevMountSdmc();
