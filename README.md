@@ -1,5 +1,10 @@
 # 🎮 PKHeX-NX (Native Switch Pokémon Save Editor)
 
+## 📥 Download the Public Beta (v0.9.3)
+**No building required!** Grab the drag-and-drop `.zip` from the [Releases page](https://github.com/cbreezy210/PKHeX-NX/releases/tag/v0.9.3-beta), extract it to the **root** of your SD card, and launch via **Title Override** (hold [R] while launching Pokémon Scarlet/Violet).
+
+Found a bug or want to vote on the next feature? Jump into [GitHub Discussions](https://github.com/cbreezy210/PKHeX-NX/discussions)!
+
 > ⚠️ **CRITICAL LAUNCH INSTRUCTION: USE TITLE OVERRIDE**
 > You **MUST** launch PKHeX-NX via **Title Override** (hold the **[R]** button while launching an installed game like *Pokémon Scarlet* or *Violet*).
 > 
