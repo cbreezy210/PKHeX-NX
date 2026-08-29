@@ -35,6 +35,7 @@ The editor grows beyond a single save. Phase 2 core closed.
 ## ✅ Shipped — v0.9.3 (Full Legality Generator + Manual Move Picker)
 Every generated Pokémon is now 100% legal, level-accurate, and fully customizable.
 
+- [x] Public Beta release (drag-and-drop .zip + Applet Mode guard)
 - [x] **Real Abilities:** Each species gets one of its legal abilities (Ability 1, Ability 2, or Hidden) with correct ID and bitflag.
 - [x] **Manual Legal Move Picker (M11):** Press [Y] in the generator to hand-pick up to 4 moves from the species' full legal learnset at or below the chosen level. Displays real move names parsed from `moves.txt`.
 - [x] **Correct Max PP:** Per-move PP values sourced from the game's move data tables.
