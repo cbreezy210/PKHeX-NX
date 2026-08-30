@@ -19,6 +19,19 @@ A 100% native Nintendo Switch homebrew application for editing Pokémon save fil
 ### ⚠️ STATUS: ACTIVE DEVELOPMENT (v0.9.3 Beta)
 The core engine, cryptography, safety features, and legality-aware generator are fully built, forensically verified, and hardware-validated on-console. The graphical UI is currently in development. Watch this repo for updates!
 
+---
+
+### 🎯 What PKHeX-NX IS / IS NOT
+
+| PKHeX-NX IS... | PKHeX-NX IS NOT... |
+| :--- | :--- |
+| A native, on-console save editor for Gen 9 Pokémon. | A replacement for Pokémon HOME or a cloud-sync tool. |
+| An educational reverse-engineering & cryptography project. | A tool for cheating in online competitive multiplayer. |
+| A safety-first editor with mandatory pre-write backups. | A "magic button" that guarantees zero risk to your save data. |
+| Built for offline, single-player enjoyment and research. | Affiliated with Nintendo, Game Freak, or The Pokémon Company. |
+
+---
+
 ### ✨ Core Features (v0.9.3)
 * **Native Switch Execution:** Edits decrypted save data directly in RAM and writes back to NAND securely.
 * **Multi-Game Framework:** Boot-time selector auto-detects installed Scarlet & Violet saves.
@@ -43,17 +56,47 @@ The core engine, cryptography, safety features, and legality-aware generator are
 * **Stat & Trait Editor:** Modify IVs, EVs, Natures, Tera Types, and Force Shiny statuses with automatic checksum healing.
 * **Hardware-Validated Round Trips:** Every operation verified end-to-end against the game's autosave format — clean renders, zero ghost artifacts.
 
-### 🎮 Supported Games
-| Game | Status | Save Format | Boxes | Slots/Box |
-| :--- | :--- | :--- | :--- | :--- |
-| **Pokémon Scarlet** | ✅ Implemented | SCBlock (`main`) | 32 | 30 |
-| **Pokémon Violet** | ✅ Implemented | SCBlock (`main`) | 32 | 30 |
-| **Legends: Z-A** | 🟡 Planned | SCBlock (`main`) | 32 | 30 |
-| **Sword/Shield** | 🟡 Planned | SCBlock (`main`) | 32 | 30 |
-| **Brilliant Diamond/Shining Pearl** | 🟡 Planned | Flat binary | 40 | 30 |
-| **Legends: Arceus** | 🟡 Planned | SCBlock (`main`) | 32 | 30 |
+---
+
+### 📂 Installation & SD Card Layout
+
+Extract the contents of the release `.zip` directly to the root of your SD card. Your SD card structure should look exactly like this:
+
+```text
+sdmc:/ (Root of your SD Card)
+├── switch/
+│   └── PKHeX-NX/
+│       └── PKHeX-NX.nro          <-- The Homebrew App
+├── pkhex-nx-assets/               <-- REQUIRED Data Files
+│   ├── species.txt
+│   ├── stats.txt
+│   ├── abilities.txt
+│   ├── growth.txt
+│   ├── learnsets.bin
+│   ├── pp.txt
+│   └── moves.txt
+└── pkhex-nx-backups/              <-- AUTO-CREATED Safety Net
+    ├── SC_main_YYYYMMDD_HHMMSS.bak
+    └── VI_main_YYYYMMDD_HHMMSS.bak
+```
+
+---
+
+### 🎮 Supported Games & Compatibility Matrix
+
+| Game | Status | Save Format | Boxes | Slots/Box | Tested FW |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Pokémon Scarlet** | ✅ Implemented | SCBlock (`main`) | 32 | 30 | 22.5.0 |
+| **Pokémon Violet** | ✅ Implemented | SCBlock (`main`) | 32 | 30 | 22.5.0 |
+| **Legends: Z-A** | 🟡 Planned | SCBlock (`main`) | 32 | 30 | - |
+| **Sword/Shield** | 🟡 Planned | SCBlock (`main`) | 32 | 30 | - |
+| **Brilliant Diamond/Shining Pearl** | 🟡 Planned | Flat binary | 40 | 30 | - |
+| **Legends: Arceus** | 🟡 Planned | SCBlock (`main`) | 32 | 30 | - |
+
+---
 
 ### 🛡️ Backup & Safety System
+
 When loading a game save on Switch, an automatic backup is created before any modifications.
 
 * **File Paths:** `sdmc:/pkhex-nx-backups/SC_main_YYYYMMDD_HHMMSS.bak` (or `VI_` for Violet).
@@ -61,10 +104,23 @@ When loading a game save on Switch, an automatic backup is created before any mo
 * **Dual-File Commit:** When committing changes to NAND (press `[L]` on main menu), the app writes to both the main save file and the backup save file simultaneously.
 * **One-Button Rollback:** To restore from your newest backup, press `[R]` on the main menu. The app will create a pre-restore backup, restore the newest timestamped backup, and commit both files to NAND.
 
-### 🗺️ Roadmap
-See [ROADMAP.md](ROADMAP.md) for the full list of shipped engine features and planned multi-game/UI updates.
+> 💡 **The Honest Note:** No save editor is 100% bulletproof. While PKHeX-NX uses military-grade verification and dual-file commits, SD cards can fail, power can cut out, and edge cases in Gen 9's complex save structure can still exist. *Always* keep a secondary backup on your PC using a tool like JKSV or Checkpoint before doing major edits. Our safety net is your first line of defense, not your only one.
+
+---
+
+### ⚠️ Known Gaps & Limitations
+
+*Strictly aligned with our public roadmap to prevent feature drift.*
+
+* **Text-Only UI:** The current interface is a developer-focused text console. A full SDL2 graphical UI with touch support is planned for v1.1.
+* **No Bag/Item Editing:** You cannot currently edit your inventory, TMs, or key items. (Planned for v1.0).
+* **No Pokédex Registration:** Injected or generated Pokémon do not automatically register as "caught" in your in-game Pokédex. (Planned for v1.0).
+* **Gen 9 Internal ID Quirk:** Pokémon introduced in Paldea (#917 Tarountula and higher) may display incorrect internal index numbers in the raw data view, though they function correctly in-game. (Fix queued for v0.9.4).
+
+---
 
 ### 🎮 Controls (Current Text UI)
+
 | Button | Action |
 | :--- | :--- |
 | **D-Pad** | Navigate boxes, slots, and menus |
@@ -76,6 +132,8 @@ See [ROADMAP.md](ROADMAP.md) for the full list of shipped engine features and pl
 | **ZR** | Export to .pk9 |
 | **L / R** | Change Box |
 | **+** | Search species / Change game |
+
+---
 
 ### 🛠️ Building from Source
 Requires devkitPro with switch-dev (libnx) installed.
@@ -99,12 +157,28 @@ py tools/make_assets.py <path-to-pkhex-ref> <output-dir>
 
 This produces `stats.txt`, `abilities.txt`, `growth.txt`, `learnsets.bin`, `pp.txt`, and `moves.txt`. Copy those (plus your `species.txt` name table) into `sdmc:/pkhex-nx-assets/` on the SD card.
 
-### ⚠️ Disclaimer
-This is an educational project. Modifying save data always carries a risk. While PKHeX-NX features a robust backup and safety-net system, always keep your own manual backups. I am not responsible for corrupted saves, lost Pokémon, or banned consoles. Use offline and at your own risk! Not affiliated with PKHeX, Nintendo, or The Pokémon Company.
+---
 
-### 🔗 Links & Credits
-* **Install Guide & Documentation Mirror:** [GameBrew Wiki](https://www.gamebrew.org/wiki/PKHeX-NX)
-* **PKHeX Team:** Concept inspiration and reference documentation ([GitHub](https://github.com/kwsch/PKHeX))
-* **devkitPro / libnx:** Switch homebrew development tools ([Website](https://devkitpro.org))
+### 🤝 Credits & Acknowledgments
+
+* **kwsch & The PKHeX Team:** For the foundational research, cryptography documentation, and the legendary desktop editor that inspired this project. ([GitHub](https://github.com/kwsch/PKHeX))
+* **Switchbrew & devkitPro:** For maintaining the libnx toolchain that makes native Switch homebrew possible. ([Website](https://devkitpro.org))
+* **The GBATemp & r/HomebrewSwitch Communities:** For early testing, hardware validation, and relentless feedback during the beta phase.
+* **Insektaure (pkHouse, pkBakery):** For setting the gold standard in native Switch Pokémon UI/UX and safety patterns.
+* **GameBrew:** For hosting the [Install Guide & Documentation Mirror](https://www.gamebrew.org/wiki/PKHeX-NX).
+
+---
+
+### ⚖️ Responsible Use & Disclaimer
+
+* **Offline Use Only:** Do not use edited Pokémon in online multiplayer, official tournaments, or ranked battles. 
+* **Respect the Ecosystem:** Do not distribute edited saves or Pokémon as your own work.
+* **Educational Purpose:** This software is provided "as-is" for research into cryptography and data structures. Modifying save data always carries a risk. I am not responsible for corrupted saves, lost Pokémon, or banned consoles. Use at your own risk! 
+* **Not Affiliated:** This project is not affiliated with, endorsed by, or sponsored by Nintendo, Game Freak, or The Pokémon Company.
+
+---
+
+### 🗺️ Roadmap
+See [ROADMAP.md](ROADMAP.md) for the full list of shipped engine features and planned multi-game/UI updates.
 
 Built with devkitPro/libnx. Educational project — always keep backups!

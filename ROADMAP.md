@@ -1,6 +1,58 @@
 # 🗺️ PKHeX-NX — Public Roadmap
 A native Nintendo Switch homebrew save editor for Pokémon (Gen 8 & 9) — no PC required.
 
+### 🎯 Roadmap Scope: What This IS / IS NOT
+
+| This Roadmap IS... | This Roadmap IS NOT... |
+| :--- | :--- |
+| A technical blueprint for native, offline save editing. | A promise of online/competitive cheating tools. |
+| Focused on cryptography, safety, and legality. | A commitment to bypassing Nintendo's anti-cheat or ban systems. |
+| Driven by community feedback and hardware validation. | A strict timeline with guaranteed, fixed release dates. |
+
+---
+
+### 🏗️ Project Architecture & Phase Tree
+
+```text
+PKHeX-NX Development Phases
+├── Phase 1: Core Engine & Safety (v0.9.x) ✅
+│   ├── SwishCrypto (SCBlock / Xorpad)
+│   ├── PK9 Codec (Gen 9 SV)
+│   └── Military-Grade Safety Net
+├── Phase 2: Content & Multi-Game (v1.0.x) 🟡
+│   ├── Gen 8 & Z-A Codecs
+│   ├── Bag Editor & Items
+│   └── Pokédex & Legality Automation
+├── Phase 3: UI Overhaul (v1.1.x) 🟠
+│   ├── SDL2 Graphical Renderer
+│   └── Touch & Highlight Navigation
+└── Phase 4: Deep Edits & Community (v2.0.x) 🔴
+    ├── Cross-Game Bank
+    └── Localization & Plugins
+```
+
+---
+
+### 📂 Installation & SD Card Layout
+*(Reference for upcoming features that interact with the SD card)*
+
+```text
+sdmc:/ (Root of your SD Card)
+├── switch/
+│   └── PKHeX-NX/
+│       └── PKHeX-NX.nro          <-- The Homebrew App
+├── pkhex-nx-assets/               <-- REQUIRED Data Files
+│   ├── species.txt, stats.txt, abilities.txt
+│   ├── growth.txt, learnsets.bin
+│   ├── pp.txt, moves.txt
+│   └── items.txt (Coming in v1.0)
+└── pkhex-nx-backups/              <-- AUTO-CREATED Safety Net
+    ├── SC_main_YYYYMMDD_HHMMSS.bak
+    └── VI_main_YYYYMMDD_HHMMSS.bak
+```
+
+---
+
 ## ✅ Shipped — v0.9.0 (The Core Engine & Scarlet Foundation)
 The math, the cryptography, and the safety nets. Forensically verified against hardware.
 
@@ -104,6 +156,66 @@ Bulletproofing the core architecture for the v1.0 transition.
 - [ ] **Multi-Language UI:** Localized .txt tables and UI strings (EN, ES, FR, DE, JA, KO).
 - [ ] **Modular Plugin System:** Community devs can write JSON scripts for new offsets.
 - [ ] **Wi-Fi Cloud Backup:** Upload backups off-console for true cloud saves.
+
+---
+
+### 🎮 Target Compatibility Matrix
+
+| Game | Status | Save Format | Boxes | Slots/Box | Target Version |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Pokémon Scarlet** | ✅ Implemented | SCBlock (`main`) | 32 | 30 | v0.9.0+ |
+| **Pokémon Violet** | ✅ Implemented | SCBlock (`main`) | 32 | 30 | v0.9.2+ |
+| **Legends: Z-A** | 🟡 Planned | SCBlock (`main`) | 32 | 30 | v1.0.0 |
+| **Sword/Shield** | 🟡 Planned | SCBlock (`main`) | 32 | 30 | v1.0.0 |
+| **Brilliant Diamond/Shining Pearl** | 🟡 Planned | Flat binary | 40 | 30 | v1.0.0 |
+| **Legends: Arceus** | 🟡 Planned | SCBlock (`main`) | 32 | 30 | v1.0.0 |
+
+---
+
+### ⚠️ Known Gaps (Strictly Aligned with Roadmap)
+
+*These limitations are known and explicitly scheduled for resolution to prevent feature drift.*
+
+* **Text-Only UI:** The current interface is a developer-focused text console. 
+  * *Fix scheduled:* **v1.1.0** (SDL2 Graphical UI).
+* **No Bag/Item Editing:** You cannot currently edit your inventory, TMs, or key items. 
+  * *Fix scheduled:* **v1.0.0** (Bag Editor).
+* **No Pokédex Registration:** Injected or generated Pokémon do not automatically register as "caught" in your in-game Pokédex. 
+  * *Fix scheduled:* **v1.0.0** (Pokédex Auto-Registration).
+* **Gen 9 Internal ID Quirk:** Pokémon introduced in Paldea (#917 Tarountula and higher) may display incorrect internal index numbers in the raw data view. 
+  * *Fix scheduled:* **v0.9.4** (Paldean Native Species Fix).
+
+---
+
+### 🛡️ Backup & Safety System Philosophy
+
+Safety is the core pillar of this roadmap. Every feature that touches NAND is gated by our safety net:
+
+* **File Paths:** `sdmc:/pkhex-nx-backups/SC_main_YYYYMMDD_HHMMSS.bak` (or `VI_` for Violet).
+* **Byte Verification:** Backups are mathematically verified after creation to ensure data integrity.
+* **Dual-File Commit:** When committing changes to NAND, the app writes to both the main save file and the backup save file simultaneously.
+* **One-Button Rollback:** Press `[R]` on the main menu to instantly restore from the newest timestamped backup.
+
+> 💡 **The Honest Note:** No save editor is 100% bulletproof. While PKHeX-NX uses military-grade verification and dual-file commits, SD cards can fail, power can cut out, and edge cases in Gen 9's complex save structure can still exist. *Always* keep a secondary backup on your PC using a tool like JKSV or Checkpoint before doing major edits. Our safety net is your first line of defense, not your only one.
+
+---
+
+### 🤝 Credits & Acknowledgments
+
+* **kwsch & The PKHeX Team:** For the foundational research, cryptography documentation, and the legendary desktop editor that inspired this project. ([GitHub](https://github.com/kwsch/PKHeX))
+* **Switchbrew & devkitPro:** For maintaining the libnx toolchain that makes native Switch homebrew possible. ([Website](https://devkitpro.org))
+* **The GBATemp & r/HomebrewSwitch Communities:** For early testing, hardware validation, and relentless feedback during the beta phase.
+* **Insektaure (pkHouse, pkBakery):** For setting the gold standard in native Switch Pokémon UI/UX and safety patterns.
+* **GameBrew:** For hosting the [Install Guide & Documentation Mirror](https://www.gamebrew.org/wiki/PKHeX-NX).
+
+---
+
+### ⚖️ Responsible Use & Disclaimer
+
+* **Offline Use Only:** Do not use edited Pokémon in online multiplayer, official tournaments, or ranked battles. 
+* **Respect the Ecosystem:** Do not distribute edited saves or Pokémon as your own work.
+* **Educational Purpose:** This software is provided "as-is" for research into cryptography and data structures. Modifying save data always carries a risk. I am not responsible for corrupted saves, lost Pokémon, or banned consoles. Use at your own risk! 
+* **Not Affiliated:** This project is not affiliated with, endorsed by, or sponsored by Nintendo, Game Freak, or The Pokémon Company.
 
 ---
 Built with devkitPro/libnx. Educational project — always keep backups!
