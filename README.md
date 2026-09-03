@@ -1,71 +1,80 @@
 # 🎮 PKHeX-NX (Native Switch Pokémon Save Editor)
-
-##  Download the Public Beta (v0.9.3)
-**No building required!** Choose your installation method below:
-
-*   **Option 1: Manual Install** → Download `PKHeX-NX-Beta-v0.9.3.zip` from [Releases](https://github.com/cbreezy210/PKHeX-NX/releases/tag/v0.9.3-beta). Extract to SD card root.
-*   **Option 2: DBI / Homebrew App Store** → Download `PKHeX-NX-DBI-v0.9.3.zip` from [Releases](https://github.com/cbreezy210/PKHeX-NX/releases/tag/v0.9.3-beta). Install via DBI or Homebrew App Store for one-click setup.
-
-Both versions contain the **exact same application**. Choose based on your preferred installation method. Launch via **Title Override** (hold `[R]` while launching Pokémon Scarlet/Violet).
-
-Found a bug or want to vote on the next feature? Jump into [GitHub Discussions](https://github.com/cbreezy210/PKHeX-NX/discussions)!
-
----
-
-### ⚠️ CRITICAL LAUNCH INSTRUCTION: USE TITLE OVERRIDE
-You **MUST** launch PKHeX-NX via Title Override (hold the **[R]** button while launching an installed game like Pokémon Scarlet or Violet). 
-
-**Do NOT launch this app from the Album / Applet Mode.** Applet Mode restricts memory access and will cause the app to fail to mount your save files or crash on startup. (The app includes a hard block to prevent this!).
-
----
+**The Pokémon SV companion tool that never leaves your Switch.**
 
 A 100% native Nintendo Switch homebrew application for editing Pokémon save files (Gen 9: Scarlet & Violet) directly on your console. No PC, no pulling the SD card, no complicated dumping tools required.
 
-### ⚠️ STATUS: ACTIVE DEVELOPMENT (v0.9.3 Beta)
-The core engine, cryptography, safety features, and legality-aware generator are fully built, forensically verified, and hardware-validated on-console. The graphical UI is currently in development. Watch this repo for updates!
+[![Version](https://img.shields.io/github/v/release/cbreezy210/PKHeX-NX)](https://github.com/cbreezy210/PKHeX-NX/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
----
+> **Note:** This is an active public beta (v0.9.3) and an educational project. Always keep backups of your save files. Modifying save data always carries a risk. The author is not responsible for corrupted saves, lost Pokémon, or banned consoles. Use offline and at your own risk. Not affiliated with Nintendo, Game Freak, or The Pokémon Company.
+>
+> **Responsible Use:** This app is built for offline, single-player enjoyment and research. Please do not use edited Pokémon in online multiplayer, official tournaments, or ranked battles, and do not distribute edited saves or Pokémon as your own work.
 
-### 🎯 What PKHeX-NX IS / IS NOT
+## 🎯 What This App Is
+| PKHeX-NX IS: | PKHeX-NX IS NOT: |
+|---|---|
+| A safe, offline save editor with automatic byte-verified backups | A replacement for Pokémon HOME or a cloud-sync tool |
+| 100% on-console (no PC, phone, or sysmodules required) | A tool for cheating in online competitive multiplayer |
+| An educational reverse-engineering & cryptography project | A "magic button" that guarantees zero risk to your save data |
 
-| PKHeX-NX IS... | PKHeX-NX IS NOT... |
-| :--- | :--- |
-| A native, on-console save editor for Gen 9 Pokémon. | A replacement for Pokémon HOME or a cloud-sync tool. |
-| An educational reverse-engineering & cryptography project. | A tool for cheating in online competitive multiplayer. |
-| A safety-first editor with mandatory pre-write backups. | A "magic button" that guarantees zero risk to your save data. |
-| Built for offline, single-player enjoyment and research. | Affiliated with Nintendo, Game Freak, or The Pokémon Company. |
+## ⚠️ CRITICAL LAUNCH INSTRUCTIONS
+For full memory and SD card access, you **MUST** launch this app via **Title Override** (hold [R] while launching a game like Pokémon Scarlet or Violet).
 
----
+**Do NOT launch it from the Album / Applet mode** — the app will refuse to run and show you exactly how to relaunch correctly, preventing save-access crashes!
 
-### ✨ Core Features (v0.9.3)
+## ✨ Features (v0.9.3)
 * **Native Switch Execution:** Edits decrypted save data directly in RAM and writes back to NAND securely.
 * **Multi-Game Framework:** Boot-time selector auto-detects installed Scarlet & Violet saves.
-* **Military-Grade Safety Net:**
-  * Automatic byte-verified SD card backups before every single write.
-  * "Egg-Killer" dual-file commit protocol (writes to both main and backup to prevent stale fallbacks).
-  * One-button emergency rollback to the newest backup.
+* **Military-Grade Safety Net:** Automatic byte-verified SD card backups before every single write, a dual-file commit protocol (writes to both main and backup to prevent stale fallbacks), and one-button emergency rollback.
 * **SwishCrypto Engine:** Fully ported SHA256 footer verification, 127-byte xorpad decryption, and SCBlock/SCXorShift32 parsing.
 * **PK9 Codec:** Native decryption, block-shuffling, and re-encryption for Pokémon Scarlet/Violet.
-* **Legality-Aware Database Generator:**
-  * Mint any species with real abilities (Ability 1 / 2 / Hidden).  * **Manual Legal Move Picker:** Hand-pick up to 4 moves from the species' legal learnset at or below the chosen level (real move names, no hex IDs!).
-  * Correct max PP per move.
-  * Growth-correct EXP across all 6 experience curves.
-  * Optional egg generation (valid egg flag, hatch cycles, level-1 moveset).
-  * 26-ball picker with correct in-game ball IDs.
-* **Comprehensive Box Toolkit:**
-  * **Inject:** Load `.pk9` files directly from your SD card.
-  * **Clone:** Duplicate any Pokémon to another box slot.
-  * **Delete:** Permanently remove a Pokémon (writes game-empty encoding).
-  * **Export:** Save any box Pokémon to a `.pk9` file on your SD card.
+* **Legality-Aware Database Generator:** Mint any species with real abilities (Ability 1 / 2 / Hidden), correct max PP, growth-correct EXP across all 6 experience curves, optional egg generation, and a 26-ball picker with correct in-game ball IDs.
+* **Manual Legal Move Picker:** Press [Y] in the generator to hand-pick up to 4 moves from the species' full legal learnset at or below the chosen level (real move names, no hex IDs!).
+* **Comprehensive Box Toolkit:** Inject `.pk9` files, Clone, Delete (native empty-slot encoding), and Export to `.pk9` — all from the 32x30 box viewer.
 * **Stat & Trait Editor:** Modify IVs, EVs, Natures, Tera Types, and Force Shiny statuses with automatic checksum healing.
+* **Native Keyboard Search:** swkbd species search across all 960 box slots.
+* **Applet Mode Guard:** The app hard-blocks Album/Applet launches and shows on-screen instructions for relaunching correctly.
+* **Embedded Homebrew Icon:** Custom Poké Ball + hexagon + circuit logo displayed in the Homebrew Menu.
 * **Hardware-Validated Round Trips:** Every operation verified end-to-end against the game's autosave format — clean renders, zero ghost artifacts.
 
----
+## 🛡️ Backup System & Safety
+When loading a game save on Switch, a full backup copy is created **before** any modification:
 
-### 📂 Installation & SD Card Layout
+```text
+sdmc:/pkhex-nx-backups/SC_main_YYYYMMDD_HHMMSS.bak   (Scarlet)
+sdmc:/pkhex-nx-backups/VI_main_YYYYMMDD_HHMMSS.bak   (Violet)
+```
 
-#### Option 1: Manual Install
-Extract the contents of `PKHeX-NX-Beta-v0.9.3.zip` directly to the root of your SD card. Your SD card structure should look exactly like this:
+**One-Button Rollback:** Press [ZL] on the main menu to instantly restore from your newest timestamped backup.
+
+**Safety Guarantees:**
+* Every save operation creates a byte-verified backup *before* writing to NAND* Dual-file commit writes to both the main and backup save simultaneously
+* SHA256 footers and checksums are re-verified and healed on every edit
+* The app refuses to run in Applet Mode to prevent save-access crashes
+
+> 💡 **The Honest Note:** No save editor is 100% bulletproof. While PKHeX-NX uses military-grade verification and dual-file commits, SD cards can fail, power can cut out, and edge cases in Gen 9's complex save structure can still exist. *Always* keep a secondary backup on your PC using a tool like JKSV or Checkpoint before doing major edits. Our safety net is your first line of defense, not your only one.
+
+## ✅ Compatibility
+| Game | Status | Save Format | Boxes | Slots/Box | Tested FW |
+|---|---|---|---|---|---|
+| **Pokémon Scarlet** | ✅ Implemented | SCBlock (`main`) | 32 | 30 | 22.5.0 |
+| **Pokémon Violet** | ✅ Implemented | SCBlock (`main`) | 32 | 30 | 22.5.0 |
+| **Legends: Z-A** | 🟡 Planned | SCBlock (`main`) | 32 | 30 | - |
+| **Sword/Shield** | 🟡 Planned | SCBlock (`main`) | 32 | 30 | - |
+| **BDSP** | 🟡 Planned | Flat binary | 40 | 30 | - |
+| **Legends: Arceus** | 🟡 Planned | SCBlock (`main`) | 32 | 30 | - |
+
+Tested by the author on FW 22.5.0 (Atmosphère 1.11.2 E). When Nintendo ships a Pokémon update, compatibility is re-verified and noted in the changelog.
+
+## 🎨 Coming in v0.9.4: Stability & Hardening Sprint
+Based on your feedback! The Paldean Native Species Fix (#917+), SD Card Space Validation, and Round-Trip Crypto Verification are next up. Then v1.0 brings the big content expansion — still deciding between prioritizing the **Bag Editor** or **Pokédex Auto-Registration** first — which would you rather see? Let us know on GitHub Discussions!
+
+## 📥 Installation
+Ensure your Switch is running Custom Firmware (Atmosphère).
+
+### Standard Installation (SD Card)
+
+1. Download the latest `PKHeX-NX-Beta-v0.9.3.zip` from the [Releases](https://github.com/cbreezy210/PKHeX-NX/releases) page.
+2. Extract the contents directly to the **root** of your SD card. This creates the following structure:
 
 ```text
 sdmc:/ (Root of your SD Card)
@@ -85,67 +94,24 @@ sdmc:/ (Root of your SD Card)
     └── VI_main_YYYYMMDD_HHMMSS.bak
 ```
 
-#### Option 2: DBI / Homebrew App Store Install
-If you installed via DBI or the Homebrew App Store using `PKHeX-NX-DBI-v0.9.3.zip`, the file structure is managed automatically. The app will appear in your homebrew menu. Just ensure you have the `pkhex-nx-assets` folder on your SD card root (as shown above) before first launch.
+3. Fully close Pokémon Scarlet/Violet (do not leave it suspended).
+4. Hold [R] and launch Pokémon Scarlet or Violet from the Home Menu to open the Homebrew Menu.
+5. Select "PKHeX-NX" to launch (do **not** run the game at the same time!).
+### Alternative Installation (DBI / Homebrew App Store)
 
----
+For users with DBI installed on their Switch, or once approved on the Homebrew App Store:
 
-### 🔄 Installation Methods Explained
+1. Download `PKHeX-NX-DBI-v0.9.3.zip` from the [Releases](https://github.com/cbreezy210/PKHeX-NX/releases) page.
+2. Install the `.nro` via DBI (MTP responder or network), or grab it from the Homebrew App Store.
+3. Ensure the `pkhex-nx-assets/` folder is on your SD card root (see structure above).
+4. Launch via Title Override (hold [R] on Pokémon Scarlet/Violet from the Home Menu).
 
-| Feature | Manual Install (`Beta-v0.9.3.zip`) | DBI Install (`DBI-v0.9.3.zip`) |
-| :--- | :--- | :--- |
-| **Setup** | Extract files manually to SD root | One-click install via DBI/App Store |
-| **Updates** | Re-download & overwrite files | Update via DBI/App Store interface |
-| **File Structure** | Visible folders on SD card | Managed internally by DBI || **App Functionality** | **Identical** | **Identical** |
-| **Launch Method** | Title Override (Hold [R]) | Title Override (Hold [R]) |
-
-**Note:** Both methods install the exact same application binary. The DBI version simply uses the standard homebrew packaging format (`config.json` + `.nro`) for easier installation and future updates.
-
----
-
-### 🎮 Supported Games & Compatibility Matrix
-
-| Game | Status | Save Format | Boxes | Slots/Box | Tested FW |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Pokémon Scarlet** | ✅ Implemented | SCBlock (`main`) | 32 | 30 | 22.5.0 |
-| **Pokémon Violet** | ✅ Implemented | SCBlock (`main`) | 32 | 30 | 22.5.0 |
-| **Legends: Z-A** |  Planned | SCBlock (`main`) | 32 | 30 | - |
-| **Sword/Shield** |  Planned | SCBlock (`main`) | 32 | 30 | - |
-| **Brilliant Diamond/Shining Pearl** | 🟡 Planned | Flat binary | 40 | 30 | - |
-| **Legends: Arceus** | 🟡 Planned | SCBlock (`main`) | 32 | 30 | - |
-
----
-
-### ️ Backup & Safety System
-
-When loading a game save on Switch, an automatic backup is created before any modifications.
-
-* **File Paths:** `sdmc:/pkhex-nx-backups/SC_main_YYYYMMDD_HHMMSS.bak` (or `VI_` for Violet).
-* **Byte Verification:** Backups are mathematically verified after creation to ensure data integrity.
-* **Dual-File Commit:** When committing changes to NAND (press `[L]` on main menu), the app writes to both the main save file and the backup save file simultaneously.
-* **One-Button Rollback:** To restore from your newest backup, press `[R]` on the main menu. The app will create a pre-restore backup, restore the newest timestamped backup, and commit both files to NAND.
-
-> 💡 **The Honest Note:** No save editor is 100% bulletproof. While PKHeX-NX uses military-grade verification and dual-file commits, SD cards can fail, power can cut out, and edge cases in Gen 9's complex save structure can still exist. *Always* keep a secondary backup on your PC using a tool like JKSV or Checkpoint before doing major edits. Our safety net is your first line of defense, not your only one.
-
----
-
-### ️ Known Gaps & Limitations
-
-*Strictly aligned with our public roadmap to prevent feature drift.*
-
-* **Text-Only UI:** The current interface is a developer-focused text console. A full SDL2 graphical UI with touch support is planned for v1.1.
-* **No Bag/Item Editing:** You cannot currently edit your inventory, TMs, or key items. (Planned for v1.0).
-* **No Pokédex Registration:** Injected or generated Pokémon do not automatically register as "caught" in your in-game Pokédex. (Planned for v1.0).
-* **Gen 9 Internal ID Quirk:** Pokémon introduced in Paldea (#917 Tarountula and higher) may display incorrect internal index numbers in the raw data view, though they function correctly in-game. (Fix queued for v0.9.4).
-
----
-
-###  Controls (Current Text UI)
-
+## 🎮 Controls
 | Button | Action |
-| :--- | :--- |
+|---|---|
 | **D-Pad** | Navigate boxes, slots, and menus |
-| **A** | Open Pokémon / Select / Confirm || **B** | Back / Cancel |
+| **A** | Open Pokémon / Select / Confirm |
+| **B** | Back / Cancel |
 | **X** | Clone selected Pokémon |
 | **Y** | Delete selected Pokémon / Pick Moves (in Generator) |
 | **ZL** | Inject from .pk9 (box viewer) / Emergency rollback (main menu) |
@@ -153,9 +119,16 @@ When loading a game save on Switch, an automatic backup is created before any mo
 | **L / R** | Change Box |
 | **+** | Search species / Change game |
 
----
+## 🗺️ Roadmap & Known Gaps
+See [ROADMAP.md](ROADMAP.md) for the full list of shipped and planned features.
 
-### 🛠️ Building from Source
+**Known Gaps (v0.9.3):**
+* Text-only developer console UI; full SDL2 graphical UI planned for v1.1
+* No Bag/Item editing yet (planned for v1.0)
+* No Pokédex registration yet (planned for v1.0)
+* Gen 9 Internal ID quirk for #917+ (fix queued for v0.9.4)
+
+## 🛠️ Building from Source
 Requires devkitPro with switch-dev (libnx) installed.
 
 ```bash
@@ -164,7 +137,7 @@ cd PKHeX-NX
 make
 ```
 
-This produces `PKHeX-NX.nro`. For DBI packaging, place the NRO in a `switch/PKHeX-NX/` folder with a `config.json` metadata file. The build is fully self-contained — **no game data dumps or extra files are required to compile.**
+This produces `PKHeX-NX.nro`. The build is fully self-contained — **no game data dumps or extra files are required to compile.**
 
 > ℹ️ **Note for developers:** All species / move / stat data is loaded **at runtime** from `sdmc:/pkhex-nx-assets/` (see the "Generating SD Assets" section below). The `romfs/*.dat` embedding rules in the Makefile are legacy leftovers from an earlier design and are **not** part of the build — you can safely ignore them.
 
@@ -172,32 +145,23 @@ This produces `PKHeX-NX.nro`. For DBI packaging, place the NRO in a `switch/PKHe
 The generator reads per-species data tables from the SD card at `sdmc:/pkhex-nx-assets/`. To build them, run the bundled script against a local PKHeX source checkout:
 
 ```bash
-py tools/make_assets.py <path-to-pkhex-ref> <output-dir>
-```
+py tools/make_assets.py <path-to-pkhex-ref> <output-dir>```
 
 This produces `stats.txt`, `abilities.txt`, `growth.txt`, `learnsets.bin`, `pp.txt`, and `moves.txt`. Copy those (plus your `species.txt` name table) into `sdmc:/pkhex-nx-assets/` on the SD card.
 
----
+## 🙏 Credits
+* **kwsch and the PKHeX project** — foundational save-structure research, cryptography documentation, and the legendary desktop editor: https://github.com/kwsch/PKHeX
+* **devkitPro and libnx communities** — Switch homebrew tooling: https://devkitpro.org
+* **The GBATemp & r/HomebrewSwitch communities** — for early testing, hardware validation, and relentless feedback
+* **Insektaure (pkHouse, pkBakery)** — for setting the gold standard in native Switch Pokémon UI/UX and safety patterns
+* **GameBrew** — for hosting the Install Guide & Documentation Mirror
 
-###  Credits & Acknowledgments
+## ⚖️ Disclaimer
+This is an educational project. Always keep backups of your save files. Modifying save data always carries a risk. I am not responsible for corrupted saves, lost Pokémon, or banned consoles. Use at your own risk!
 
-* **kwsch & The PKHeX Team:** For the foundational research, cryptography documentation, and the legendary desktop editor that inspired this project. ([GitHub](https://github.com/kwsch/PKHeX))
-* **Switchbrew & devkitPro:** For maintaining the libnx toolchain that makes native Switch homebrew possible. ([Website](https://devkitpro.org))
-* **The GBATemp & r/HomebrewSwitch Communities:** For early testing, hardware validation, and relentless feedback during the beta phase.
-* **Insektaure (pkHouse, pkBakery):** For setting the gold standard in native Switch Pokémon UI/UX and safety patterns.
-* **GameBrew:** For hosting the [Install Guide & Documentation Mirror](https://www.gamebrew.org/wiki/PKHeX-NX).
-
----
-
-### ⚖️ Responsible Use & Disclaimer
-
-* **Offline Use Only:** Do not use edited Pokémon in online multiplayer, official tournaments, or ranked battles. 
-* **Respect the Ecosystem:** Do not distribute edited saves or Pokémon as your own work.
-* **Educational Purpose:** This software is provided "as-is" for research into cryptography and data structures. Modifying save data always carries a risk. I am not responsible for corrupted saves, lost Pokémon, or banned consoles. Use at your own risk! 
-* **Not Affiliated:** This project is not affiliated with, endorsed by, or sponsored by Nintendo, Game Freak, or The Pokémon Company.
----
-
-### 🗺️ Roadmap
-See [ROADMAP.md](ROADMAP.md) for the full list of shipped engine features and planned multi-game/UI updates.
-
-Built with devkitPro/libnx. Educational project — always keep backups!
+## 💬 Community & External Links
+* **GitHub Releases (Download):** https://github.com/cbreezy210/PKHeX-NX/releases
+* **GitHub Discussions (Feedback & Feature Votes):** https://github.com/cbreezy210/PKHeX-NX/discussions
+* **GameBrew Wiki (Install Guide & Docs Mirror):** https://www.gamebrew.org/wiki/PKHeX-NX
+* **GBATemp Devlog Thread:** https://gbatemp.net/threads/pkhex-nx-native-switch-pokemon-save-editor-scarlet-violet-devlog-sneak-peek.683964/
+* **Reddit Release Thread:** https://www.reddit.com/r/homebrew/s/Foe8Q8cJsN
