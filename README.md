@@ -144,10 +144,11 @@ This produces `PKHeX-NX.nro`. The build is fully self-contained — **no game da
 ### 🧪 Generating SD Assets (Developers)
 The generator reads per-species data tables from the SD card at `sdmc:/pkhex-nx-assets/`. To build them, run the bundled script against a local PKHeX source checkout:
 
-```bash
-py tools/make_assets.py <path-to-pkhex-ref> <output-dir>```
+`py tools/make_assets.py <path-to-pkhex-ref> <output-dir>`
 
 This produces `stats.txt`, `abilities.txt`, `growth.txt`, `learnsets.bin`, `pp.txt`, and `moves.txt`. Copy those (plus your `species.txt` name table) into `sdmc:/pkhex-nx-assets/` on the SD card.
+
+---
 
 ## 🙏 Credits
 * **kwsch and the PKHeX project** — foundational save-structure research, cryptography documentation, and the legendary desktop editor: https://github.com/kwsch/PKHeX
