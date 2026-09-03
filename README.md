@@ -77,21 +77,21 @@ Ensure your Switch is running Custom Firmware (Atmosphère).
 2. Extract the contents directly to the **root** of your SD card. This creates the following structure:
 
 ```text
-sdmc:/ (Root of your SD Card)
-├── switch/
-│   └── PKHeX-NX/
-│       └── PKHeX-NX.nro          <-- The Homebrew App
-├── pkhex-nx-assets/               <-- REQUIRED Data Files
-│   ├── species.txt
-│   ├── stats.txt
-│   ├── abilities.txt
-│   ├── growth.txt
-│   ├── learnsets.bin
-│   ├── pp.txt
-│   └── moves.txt
-└── pkhex-nx-backups/              <-- AUTO-CREATED Safety Net
-    ├── SC_main_YYYYMMDD_HHMMSS.bak
-    └── VI_main_YYYYMMDD_HHMMSS.bak
+📦 SD (Root)
+┣━ 📂 switch
+┃  ┗━ 📂 PKHeX-NX
+┃     ┗━ 📜 PKHeX-NX.nro
+┣━ 📂 pkhex-nx-assets
+┃  ┣━ 📄 species.txt
+┃  ┣━ 📄 stats.txt
+┃  ┣━ 📄 abilities.txt
+┃  ┣━ 📄 growth.txt
+┃  ┣━ 📄 learnsets.bin
+┃  ┣━ 📄 pp.txt
+┃  ┗━ 📄 moves.txt
+┗━ 📂 pkhex-nx-backups (auto-created)
+   ┣━ 📄 SC_main_YYYYMMDD_HHMMSS.bak
+   ┗━ 📄 VI_main_YYYYMMDD_HHMMSS.bak
 ```
 
 3. Fully close Pokémon Scarlet/Violet (do not leave it suspended).
