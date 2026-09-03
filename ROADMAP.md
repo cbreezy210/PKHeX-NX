@@ -1,4 +1,4 @@
-# 🗺️ PKHeX-NX — Public Roadmap
+# ️ PKHeX-NX — Public Roadmap
 A native Nintendo Switch homebrew save editor for Pokémon (Gen 8 & 9) — no PC required.
 
 ### 🎯 Roadmap Scope: What This IS / IS NOT
@@ -13,43 +13,42 @@ A native Nintendo Switch homebrew save editor for Pokémon (Gen 8 & 9) — no PC
 
 ### 🏗️ Project Architecture & Phase Tree
 
-```text
 PKHeX-NX Development Phases
 ├── Phase 1: Core Engine & Safety (v0.9.x) ✅
 │   ├── SwishCrypto (SCBlock / Xorpad)
 │   ├── PK9 Codec (Gen 9 SV)
 │   └── Military-Grade Safety Net
-├── Phase 2: Content & Multi-Game (v1.0.x) 🟡
+├── Phase 2: Content & Multi-Game (v1.0.x) 
 │   ├── Gen 8 & Z-A Codecs
 │   ├── Bag Editor & Items
 │   └── Pokédex & Legality Automation
-├── Phase 3: UI Overhaul (v1.1.x) 🟠
+── Phase 3: UI Overhaul (v1.1.x) 🟠
 │   ├── SDL2 Graphical Renderer
 │   └── Touch & Highlight Navigation
 └── Phase 4: Deep Edits & Community (v2.0.x) 🔴
     ├── Cross-Game Bank
     └── Localization & Plugins
-```
 
 ---
 
 ### 📂 Installation & SD Card Layout
 *(Reference for upcoming features that interact with the SD card)*
 
-```text
-sdmc:/ (Root of your SD Card)
-├── switch/
-│   └── PKHeX-NX/
-│       └── PKHeX-NX.nro          <-- The Homebrew App
-├── pkhex-nx-assets/               <-- REQUIRED Data Files
-│   ├── species.txt, stats.txt, abilities.txt
-│   ├── growth.txt, learnsets.bin
-│   ├── pp.txt, moves.txt
-│   └── items.txt (Coming in v1.0)
-└── pkhex-nx-backups/              <-- AUTO-CREATED Safety Net
-    ├── SC_main_YYYYMMDD_HHMMSS.bak
-    └── VI_main_YYYYMMDD_HHMMSS.bak
-```
+📦 SD (Root)
+┣━ 📂 switch
+┃  ┗━ 📂 PKHeX-NX
+┃     ┗━ 📜 PKHeX-NX.nro
+┣━ 📂 pkhex-nx-assets
+┃  ┣━  species.txt
+┃  ┣━  stats.txt
+┃  ┣━  abilities.txt
+┃  ┣━  growth.txt
+┃  ┣━  learnsets.bin
+┃  ┣━ 📄 pp.txt
+┃  ┗━ 📄 moves.txt
+┗━ 📂 pkhex-nx-backups (auto-created)
+   ┣━ 📄 SC_main_YYYYMMDD_HHMMSS.bak
+   ┗━  VI_main_YYYYMMDD_HHMMSS.bak
 
 ---
 
@@ -82,8 +81,8 @@ The editor grows beyond a single save. Phase 2 core closed.
 - [x] **Native Keyboard Search:** swkbd species search across all 960 box slots.
 - [x] **Base-Stat Engine:** Real per-species base stats parsed from SD assets for accurate stat computation.
 
-## ✅ Shipped — v0.9.3 (Full Legality Generator + Manual Move Picker)
-Every generated Pokémon is now 100% legal, level-accurate, and fully customizable.
+## ✅ Shipped — v0.9.3 (Full Legality Generator + Distribution Launch)
+Every generated Pokémon is now 100% legal, level-accurate, and fully customizable. Multi-channel distribution established.
 
 - [x] **Public Beta release:** Drag-and-drop .zip + Applet Mode guard.
 - [x] **Real Abilities:** Each species gets one of its legal abilities (Ability 1, Ability 2, or Hidden) with correct ID and bitflag.
@@ -93,18 +92,21 @@ Every generated Pokémon is now 100% legal, level-accurate, and fully customizab
 - [x] **Egg Generation:** Toggle to create a valid egg (level 1, egg flag set, correct hatch cycles, level-1 moveset).
 - [x] **Growth-Correct EXP:** All 6 experience curves (Med Fast / Erratic / Fluctuating / Med Slow / Fast / Slow) implemented per-species — no more level drift.
 - [x] **Embedded Homebrew Icon:** Custom Poké Ball + hexagon + circuit logo displayed in the Homebrew Menu.
+- [x] **DBI Packaging:** Created config.json + NRO structure for one-click installation via DBI MTP.
+- [x] **Homebrew App Store Submission:** Officially submitted to ForTheUsers store for review/approval.
+- [x] **Community Launch:** Featured on GBATemp and Reddit (#1 r/HomebrewSwitch, #2 r/homebrew).
 
 ## 🟢 Coming Soon — v0.9.4 (Stability & Hardening Sprint)
 Bulletproofing the core architecture for the v1.0 transition.
 
 - [ ] **Paldean Native Species Fix:** Correctly map internal Gen 9 species IDs to National Dex for Pokémon #917+ (Tarountula and beyond) to ensure accurate names and sprites in the Box Viewer.
 - [ ] **SD Card Space Validation:** Check available free space (requires 2x save size) before creating backups to prevent silent write failures.
-- [ ] **Round-Trip Crypto Verification:** Mathematically verify the parser on boot (`encrypt(decrypt(x)) == x`) to guarantee data integrity before any editing begins.
+- [ ] **Round-Trip Crypto Verification:** Mathematically verify the parser on boot (encrypt(decrypt(x)) == x) to guarantee data integrity before any editing begins.
 
-## 🟡 Coming Next — v1.0.0 (The Multi-Game & Content Expansion)
+##  Coming Next — v1.0.0 (The Multi-Game & Content Expansion)
 *Target Release: Late 2026*
 
-### 🧬 Legality & Quality of Life
+###  Legality & Quality of Life
 - [ ] **Pokédex Auto-Registration:** Injected Pokémon are automatically registered as seen/caught in the in-game Pokédex.
 - [ ] **Handling Trainer Updates:** Pokémon moved between saves get HT fields updated exactly like an in-game trade.
 - [ ] **Advanced Box Search:** Filter boxes by shiny, egg, level range, and perfect IVs.
@@ -115,7 +117,7 @@ Bulletproofing the core architecture for the v1.0 transition.
 - [ ] **Legends: Z-A Support:** PK9 codec reuse with Z-A specific block keys.
 - [ ] **Sword/Shield, BDSP, Legends: Arceus:** PK8, PB8, and PA8 codec ports.
 
-### 📖 Data & Content
+###  Data & Content
 - [ ] **SD Name Tables:** items.txt parsed into vectors at boot for Bag Editor.
 - [ ] **Bag Editor:** Parse and edit the item block with a visual slot picker.
 - [ ] **Advanced Legality Validation:** Legalize button that aligns OT/TID/HT/memories and runs deep legality checks so edited Pokémon stay safe for HOME and online play.
@@ -129,7 +131,7 @@ Bulletproofing the core architecture for the v1.0 transition.
 - [ ] **Highlight-Bar Navigation:** Clean, centered layout to prevent text overflow.
 - [ ] **Graceful App Exit:** Dedicated "Quit App" option in the main menu.
 
-### 🛡️ Safety & Reliability
+### ️ Safety & Reliability
 - [ ] **"Dry Run" Preview Mode:** See exactly what will change before writing to NAND.
 - [ ] **Rolling Backup Manager:** Keep the last 3 backups with timestamps and a visual picker.
 - [ ] **Game Version Validator:** Warn if save offsets don't match the current game patch.
@@ -149,7 +151,7 @@ Bulletproofing the core architecture for the v1.0 transition.
 - [ ] **Story & Raid Flags:** Unlock legendary cutscenes, gym badges, and manipulate raid seeds.
 
 ### 🎨 UI & Graphics
-- [ ] **Sprite Atlas:** Blit tiny Pokémon icons next to each box slot.
+- [ ] **Sprite Atlas:** Blit tiny Pokémon icons next to each box slot using PokeAPI/sprites repo (icons/ folder, ~68x56px). Attribution handled via Smogon community credits.
 - [ ] **Save File "Diff" Viewer:** Compare backup and current save side-by-side before writing.
 
 ### 🌍 Community & Localization
@@ -172,7 +174,7 @@ Bulletproofing the core architecture for the v1.0 transition.
 
 ---
 
-### ⚠️ Known Gaps (Strictly Aligned with Roadmap)
+### ️ Known Gaps (Strictly Aligned with Roadmap)
 
 *These limitations are known and explicitly scheduled for resolution to prevent feature drift.*
 
