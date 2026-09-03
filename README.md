@@ -1,7 +1,12 @@
 # 🎮 PKHeX-NX (Native Switch Pokémon Save Editor)
 
-## 📥 Download the Public Beta (v0.9.3)
-**No building required!** Grab the drag-and-drop `.zip` from the [Releases page](https://github.com/cbreezy210/PKHeX-NX/releases/tag/v0.9.3-beta), extract it to the **root** of your SD card, and launch via **Title Override** (hold `[R]` while launching Pokémon Scarlet/Violet).
+##  Download the Public Beta (v0.9.3)
+**No building required!** Choose your installation method below:
+
+*   **Option 1: Manual Install** → Download `PKHeX-NX-Beta-v0.9.3.zip` from [Releases](https://github.com/cbreezy210/PKHeX-NX/releases/tag/v0.9.3-beta). Extract to SD card root.
+*   **Option 2: DBI / Homebrew App Store** → Download `PKHeX-NX-DBI-v0.9.3.zip` from [Releases](https://github.com/cbreezy210/PKHeX-NX/releases/tag/v0.9.3-beta). Install via DBI or Homebrew App Store for one-click setup.
+
+Both versions contain the **exact same application**. Choose based on your preferred installation method. Launch via **Title Override** (hold `[R]` while launching Pokémon Scarlet/Violet).
 
 Found a bug or want to vote on the next feature? Jump into [GitHub Discussions](https://github.com/cbreezy210/PKHeX-NX/discussions)!
 
@@ -42,8 +47,7 @@ The core engine, cryptography, safety features, and legality-aware generator are
 * **SwishCrypto Engine:** Fully ported SHA256 footer verification, 127-byte xorpad decryption, and SCBlock/SCXorShift32 parsing.
 * **PK9 Codec:** Native decryption, block-shuffling, and re-encryption for Pokémon Scarlet/Violet.
 * **Legality-Aware Database Generator:**
-  * Mint any species with real abilities (Ability 1 / 2 / Hidden).
-  * **Manual Legal Move Picker:** Hand-pick up to 4 moves from the species' legal learnset at or below the chosen level (real move names, no hex IDs!).
+  * Mint any species with real abilities (Ability 1 / 2 / Hidden).  * **Manual Legal Move Picker:** Hand-pick up to 4 moves from the species' legal learnset at or below the chosen level (real move names, no hex IDs!).
   * Correct max PP per move.
   * Growth-correct EXP across all 6 experience curves.
   * Optional egg generation (valid egg flag, hatch cycles, level-1 moveset).
@@ -60,7 +64,8 @@ The core engine, cryptography, safety features, and legality-aware generator are
 
 ### 📂 Installation & SD Card Layout
 
-Extract the contents of the release `.zip` directly to the root of your SD card. Your SD card structure should look exactly like this:
+#### Option 1: Manual Install
+Extract the contents of `PKHeX-NX-Beta-v0.9.3.zip` directly to the root of your SD card. Your SD card structure should look exactly like this:
 
 ```text
 sdmc:/ (Root of your SD Card)
@@ -80,6 +85,22 @@ sdmc:/ (Root of your SD Card)
     └── VI_main_YYYYMMDD_HHMMSS.bak
 ```
 
+#### Option 2: DBI / Homebrew App Store Install
+If you installed via DBI or the Homebrew App Store using `PKHeX-NX-DBI-v0.9.3.zip`, the file structure is managed automatically. The app will appear in your homebrew menu. Just ensure you have the `pkhex-nx-assets` folder on your SD card root (as shown above) before first launch.
+
+---
+
+### 🔄 Installation Methods Explained
+
+| Feature | Manual Install (`Beta-v0.9.3.zip`) | DBI Install (`DBI-v0.9.3.zip`) |
+| :--- | :--- | :--- |
+| **Setup** | Extract files manually to SD root | One-click install via DBI/App Store |
+| **Updates** | Re-download & overwrite files | Update via DBI/App Store interface |
+| **File Structure** | Visible folders on SD card | Managed internally by DBI || **App Functionality** | **Identical** | **Identical** |
+| **Launch Method** | Title Override (Hold [R]) | Title Override (Hold [R]) |
+
+**Note:** Both methods install the exact same application binary. The DBI version simply uses the standard homebrew packaging format (`config.json` + `.nro`) for easier installation and future updates.
+
 ---
 
 ### 🎮 Supported Games & Compatibility Matrix
@@ -88,14 +109,14 @@ sdmc:/ (Root of your SD Card)
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Pokémon Scarlet** | ✅ Implemented | SCBlock (`main`) | 32 | 30 | 22.5.0 |
 | **Pokémon Violet** | ✅ Implemented | SCBlock (`main`) | 32 | 30 | 22.5.0 |
-| **Legends: Z-A** | 🟡 Planned | SCBlock (`main`) | 32 | 30 | - |
-| **Sword/Shield** | 🟡 Planned | SCBlock (`main`) | 32 | 30 | - |
+| **Legends: Z-A** |  Planned | SCBlock (`main`) | 32 | 30 | - |
+| **Sword/Shield** |  Planned | SCBlock (`main`) | 32 | 30 | - |
 | **Brilliant Diamond/Shining Pearl** | 🟡 Planned | Flat binary | 40 | 30 | - |
 | **Legends: Arceus** | 🟡 Planned | SCBlock (`main`) | 32 | 30 | - |
 
 ---
 
-### 🛡️ Backup & Safety System
+### ️ Backup & Safety System
 
 When loading a game save on Switch, an automatic backup is created before any modifications.
 
@@ -108,7 +129,7 @@ When loading a game save on Switch, an automatic backup is created before any mo
 
 ---
 
-### ⚠️ Known Gaps & Limitations
+### ️ Known Gaps & Limitations
 
 *Strictly aligned with our public roadmap to prevent feature drift.*
 
@@ -119,13 +140,12 @@ When loading a game save on Switch, an automatic backup is created before any mo
 
 ---
 
-### 🎮 Controls (Current Text UI)
+###  Controls (Current Text UI)
 
 | Button | Action |
 | :--- | :--- |
 | **D-Pad** | Navigate boxes, slots, and menus |
-| **A** | Open Pokémon / Select / Confirm |
-| **B** | Back / Cancel |
+| **A** | Open Pokémon / Select / Confirm || **B** | Back / Cancel |
 | **X** | Clone selected Pokémon |
 | **Y** | Delete selected Pokémon / Pick Moves (in Generator) |
 | **ZL** | Inject from .pk9 (box viewer) / Emergency rollback (main menu) |
@@ -144,7 +164,7 @@ cd PKHeX-NX
 make
 ```
 
-This produces `PKHeX-NX.nro`. The build is fully self-contained — **no game data dumps or extra files are required to compile.**
+This produces `PKHeX-NX.nro`. For DBI packaging, place the NRO in a `switch/PKHeX-NX/` folder with a `config.json` metadata file. The build is fully self-contained — **no game data dumps or extra files are required to compile.**
 
 > ℹ️ **Note for developers:** All species / move / stat data is loaded **at runtime** from `sdmc:/pkhex-nx-assets/` (see the "Generating SD Assets" section below). The `romfs/*.dat` embedding rules in the Makefile are legacy leftovers from an earlier design and are **not** part of the build — you can safely ignore them.
 
@@ -159,7 +179,7 @@ This produces `stats.txt`, `abilities.txt`, `growth.txt`, `learnsets.bin`, `pp.t
 
 ---
 
-### 🤝 Credits & Acknowledgments
+###  Credits & Acknowledgments
 
 * **kwsch & The PKHeX Team:** For the foundational research, cryptography documentation, and the legendary desktop editor that inspired this project. ([GitHub](https://github.com/kwsch/PKHeX))
 * **Switchbrew & devkitPro:** For maintaining the libnx toolchain that makes native Switch homebrew possible. ([Website](https://devkitpro.org))
@@ -175,7 +195,6 @@ This produces `stats.txt`, `abilities.txt`, `growth.txt`, `learnsets.bin`, `pp.t
 * **Respect the Ecosystem:** Do not distribute edited saves or Pokémon as your own work.
 * **Educational Purpose:** This software is provided "as-is" for research into cryptography and data structures. Modifying save data always carries a risk. I am not responsible for corrupted saves, lost Pokémon, or banned consoles. Use at your own risk! 
 * **Not Affiliated:** This project is not affiliated with, endorsed by, or sponsored by Nintendo, Game Freak, or The Pokémon Company.
-
 ---
 
 ### 🗺️ Roadmap
