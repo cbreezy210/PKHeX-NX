@@ -13,6 +13,7 @@ A native Nintendo Switch homebrew save editor for Pokémon (Gen 8 & 9) — no PC
 
 ### 🏗️ Project Architecture & Phase Tree
 
+```text
 PKHeX-NX Development Phases
 ├── Phase 1: Core Engine & Safety (v0.9.x) ✅
 │   ├── SwishCrypto (SCBlock / Xorpad)
@@ -28,12 +29,14 @@ PKHeX-NX Development Phases
 └── Phase 4: Deep Edits & Community (v2.0.x) 🔴
     ├── Cross-Game Bank
     └── Localization & Plugins
+```
 
 ---
 
 ### 📂 Installation & SD Card Layout
 *(Reference for upcoming features that interact with the SD card)*
 
+```text
 📦 SD (Root)
 ┣━ 📂 switch
 ┃  ┗━ 📂 PKHeX-NX
@@ -49,6 +52,7 @@ PKHeX-NX Development Phases
 ┗━ 📂 pkhex-nx-backups (auto-created)
    ┣━ 📄 SC_main_YYYYMMDD_HHMMSS.bak
    ┗━  VI_main_YYYYMMDD_HHMMSS.bak
+```
 
 ---
 
