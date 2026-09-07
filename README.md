@@ -3,7 +3,7 @@
 
 A 100% native Nintendo Switch homebrew application for editing Pokémon save files (Gen 9: Scarlet & Violet) directly on your console. No PC, no pulling the SD card, no complicated dumping tools required.
 
-[![Version](https://img.shields.io/github/v/release/cbreezy210/PKHeX-NX)](https://github.com/cbreezy210/PKHeX-NX/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/github/v/release/cbreezy210/PKHeX-NX?include_prereleases)](https://github.com/cbreezy210/PKHeX-NX/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 > **Note:** This is an active public beta (v0.9.4) and an educational project. Always keep backups of your save files. Modifying save data always carries a risk. The author is not responsible for corrupted saves, lost Pokémon, or banned consoles. Use offline and at your own risk. Not affiliated with Nintendo, Game Freak, or The Pokémon Company.
 >
