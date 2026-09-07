@@ -100,17 +100,17 @@ Every generated Pokémon is now 100% legal, level-accurate, and fully customizab
 - [x] **Homebrew App Store Submission:** Officially submitted to ForTheUsers store for review/approval.
 - [x] **Community Launch:** Featured on GBATemp and Reddit (#1 r/HomebrewSwitch, #2 r/homebrew).
 
-## 🟢 Coming Soon — v0.9.4 (Stability & Hardening Sprint)
+## ✅ Shipped — v0.9.4 (Stability & Hardening Sprint)
 Bulletproofing the core architecture for the v1.0 transition.
 
-- [ ] **Paldean Native Species Fix:** Correctly map internal Gen 9 species IDs to National Dex for Pokémon #917+ (Tarountula and beyond) to ensure accurate names and sprites in the Box Viewer.
-- [ ] **SD Card Space Validation:** Check available free space (requires 2x save size) before creating backups to prevent silent write failures.
-- [ ] **Round-Trip Crypto Verification:** Mathematically verify the parser on boot (encrypt(decrypt(x)) == x) to guarantee data integrity before any editing begins.
+- [x] **Paldean Native Species Fix (Species #917 Audit):** Strict species ID clamping (1-1025) to prevent Gen 9 "Bad Egg" corruption bugs, directly addressing the issues seen in competing tools.
+- [x] **SD Card Space Validation:** Checks available SD card space before creating backups to prevent mid-write corruption.
+- [x] **Round-Trip Crypto Verification:** Mathematically verify the parser on boot (encrypt(decrypt(x)) == x) to guarantee data integrity before any editing begins.
 
-##  Coming Next — v1.0.0 (The Multi-Game & Content Expansion)
+## 🟢 Coming Next — v1.0.0 (The Multi-Game & Content Expansion)
 *Target Release: Late 2026*
 
-###  Legality & Quality of Life
+### ⚖️ Legality & Quality of Life
 - [ ] **Pokédex Auto-Registration:** Injected Pokémon are automatically registered as seen/caught in the in-game Pokédex.
 - [ ] **Handling Trainer Updates:** Pokémon moved between saves get HT fields updated exactly like an in-game trade.
 - [ ] **Advanced Box Search:** Filter boxes by shiny, egg, level range, and perfect IVs.
@@ -121,7 +121,7 @@ Bulletproofing the core architecture for the v1.0 transition.
 - [ ] **Legends: Z-A Support:** PK9 codec reuse with Z-A specific block keys.
 - [ ] **Sword/Shield, BDSP, Legends: Arceus:** PK8, PB8, and PA8 codec ports.
 
-###  Data & Content
+### 📦 Data & Content
 - [ ] **SD Name Tables:** items.txt parsed into vectors at boot for Bag Editor.
 - [ ] **Bag Editor:** Parse and edit the item block with a visual slot picker.
 - [ ] **Advanced Legality Validation:** Legalize button that aligns OT/TID/HT/memories and runs deep legality checks so edited Pokémon stay safe for HOME and online play.
@@ -135,7 +135,7 @@ Bulletproofing the core architecture for the v1.0 transition.
 - [ ] **Highlight-Bar Navigation:** Clean, centered layout to prevent text overflow.
 - [ ] **Graceful App Exit:** Dedicated "Quit App" option in the main menu.
 
-### ️ Safety & Reliability
+### 🛡️ Safety & Reliability
 - [ ] **"Dry Run" Preview Mode:** See exactly what will change before writing to NAND.
 - [ ] **Rolling Backup Manager:** Keep the last 3 backups with timestamps and a visual picker.
 - [ ] **Game Version Validator:** Warn if save offsets don't match the current game patch.
@@ -188,8 +188,6 @@ Bulletproofing the core architecture for the v1.0 transition.
   * *Fix scheduled:* **v1.0.0** (Bag Editor).
 * **No Pokédex Registration:** Injected or generated Pokémon do not automatically register as "caught" in your in-game Pokédex. 
   * *Fix scheduled:* **v1.0.0** (Pokédex Auto-Registration).
-* **Gen 9 Internal ID Quirk:** Pokémon introduced in Paldea (#917 Tarountula and higher) may display incorrect internal index numbers in the raw data view. 
-  * *Fix scheduled:* **v0.9.4** (Paldean Native Species Fix).
 
 ---
 
