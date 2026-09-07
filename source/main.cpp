@@ -270,7 +270,7 @@ static const char* speciesName(u16 s){
     return nullptr;
 }
 
-// v0.9.4: Full PKHeX SpeciesConverter - Maps National Dex <-> Gen 9 Internal ID
+// v0.9.4: Full PKHeX SpeciesConverter - Maps National Dex -> Gen 9 Internal ID
 static const int8_t Table9NationalToInternal[] = {
     1, 1, 1,
     1, 33, 33, 33, 21, 21, 44, 44, 7, 7,
@@ -286,47 +286,26 @@ static const int8_t Table9NationalToInternal[] = {
     -3, -3, -2, -4, -3, -3,
 };
 
-static const int8_t Table9InternalToNational[] = {
-    65, -1, -1,
-    -1, -1, 31, 31, 47, 47, 29, 29, 53, 31,
-    31, 46, 44, 30, 30, -7, -7, -7, 13, 13,
-    -2, -2, 23, 23, 24, -21, -21, 27, 27, 47,
-    47, 47, 26, 14, -33, -33, -33, -17, -17, 3,
-    -29, 12, -12, -31, -31, -31, 3, 3, -24, -24,
-    -44, -44, -30, -30, -28, -28, 23, 23, 6, 7,
-    29, 8, 3, 4, 4, 20, 4, 23, 6, 3,
-    3, 4, -1, 13, 9, 7, 5, 7, 9, 9,
-    -43, -43, -43, -68, -68, -68, -58, -58, -25, -29,
-    -31, 6, -1, 6, 0, 0, 0, 3, 3, 4,
-    2, 3, 3, -5, -12, -12,
-};
-
 static u16 NationalDexToGen9Internal(u16 nationalDex) {
-    if (nationalDex < 1 || nationalDex > 1025) return 1;
-    if (nationalDex < 917) return nationalDex;
+    if (nationalDex < 1 || nationalDex > 1025) return 1; // Clamp to valid range
+    
+    if (nationalDex < 917) {
+        return nationalDex; // 1-916 map directly
+    }
     
     int shift = nationalDex - 917;
     int table_len = sizeof(Table9NationalToInternal) / sizeof(Table9NationalToInternal[0]);
-    if (shift >= table_len) return nationalDex;
+    if (shift >= table_len) {
+        return nationalDex; // Fallback for safety
+    }
     
     return (u16)(nationalDex + Table9NationalToInternal[shift]);
 }
 
-static u16 InternalToNationalDex(u16 internalId) {
-    if (internalId < 1 || internalId > 1025) return 1;
-    if (internalId < 917) return internalId;
-    
-    int shift = internalId - 917;
-    int table_len = sizeof(Table9InternalToNational) / sizeof(Table9InternalToNational[0]);
-    if (shift >= table_len) return internalId;
-    
-    return (u16)(internalId + Table9InternalToNational[shift]);
-}
-
-// ClampSpecies ONLY validates the National Dex ID.
+// ClampSpecies ONLY validates the National Dex ID. It does NOT convert to Internal ID.
 static u16 ClampSpecies(u16 species) {
-    if (species < 1) return 1;
-    if (species > 1025) return 1025;
+    if (species < 1) return 1;       // Prevent 0 (None) or negative
+    if (species > 1025) return 1025; // Hard cap at Pecharunt (Gen 9 max)
     return species;
 }
 
@@ -359,13 +338,14 @@ static bool movePicker(u16 species, u16 level, u16* out_moves) {
         return false;
     }
 
+    // Initialize with the last 4 legal moves (default behavior)
     for (int i = 0; i < 4; i++) out_moves[i] = 0;
     int start_idx = (num_avail > 4) ? num_avail - 4 : 0;
     for (int i = 0; i < 4 && (start_idx + i) < num_avail; i++) {
         out_moves[i] = available[start_idx + i];
     }
 
-    int slot = 0;
+    int slot = 0; // Which of the 4 slots we are editing (0-3)
     
     while (true) {
         printf("\x1b[2J\x1b[0;0H");
@@ -388,13 +368,14 @@ static bool movePicker(u16 species, u16 level, u16* out_moves) {
         consoleUpdate(NULL);
         
         u64 k = waitBtn();
-        if (k & HidNpadButton_B) return false;
-        if (k & HidNpadButton_A) return true;
+        if (k & HidNpadButton_B) return false; // Cancelled, generatePK9 will use defaults
+        if (k & HidNpadButton_A) return true;  // Confirmed
         
         if (k & HidNpadButton_Up && slot > 0) slot--;
         if (k & HidNpadButton_Down && slot < 3) slot++;
         
         if (k & HidNpadButton_Left || k & HidNpadButton_Right) {
+            // Find current index in available list
             int cur_idx = -1;
             for (int i = 0; i < num_avail; i++) {
                 if (available[i] == out_moves[slot]) { cur_idx = i; break; }
@@ -415,7 +396,7 @@ static void generatePK9(u8* out344, u16 species, u16 level, u8 nature, u8 ball, 
     u16 internalSpecies = NationalDexToGen9Internal(safeSpecies); // Converts to Internal ID for save file
 
     memset(out344, 0, 344);
-    if (egg) level = 1;
+    if (egg) level = 1;   // eggs are always level 1
 
     u32 ec = (u32)rand();
     WLE32(out344 + 0, ec);
@@ -423,6 +404,7 @@ static void generatePK9(u8* out344, u16 species, u16 level, u8 nature, u8 ball, 
     WLE16(out344 + 12, (u16)(id32 & 0xFFFF));
     WLE16(out344 + 14, (u16)(id32 >> 16));
     
+    // Use safeSpecies (National Dex) for all asset lookups
     u32 exp = expForLevel(level, growthOf(safeSpecies));
     WLE32(out344 + 16, exp);
 
@@ -464,6 +446,7 @@ static void generatePK9(u8* out344, u16 species, u16 level, u8 nature, u8 ball, 
         out344[0x7A + i] = pp;
     }
 
+    // IVs all 31; bit30 = egg flag
     WLE32(out344 + 0x8C, 0x3FFFFFFF | (egg ? (1u<<30) : 0));
 
     out344[0x94] = 0;
@@ -472,7 +455,7 @@ static void generatePK9(u8* out344, u16 species, u16 level, u8 nature, u8 ball, 
     for (int i = 0; i < 12 && otName[i]; i++)
         WLE16(out344 + 0xF8 + i * 2, (u8)otName[i]);
 
-    out344[0x10C] = egg ? 10 : 70;
+    out344[0x10C] = egg ? 10 : 70;   // egg cycles (egg) / friendship (normal)
 
     out344[0x11C] = 23;
     out344[0x11D] = 8;
@@ -643,7 +626,7 @@ static bool checkSDSpace(size_t requiredBytes){
     struct statvfs st;
     if (statvfs("sdmc:/", &st) != 0) {
         printf("\nWARNING: Could not check SD card space.\n");
-        return true;
+        return true; // Don't block if we can't check
     }
     
     u64 freeBytes = (u64)st.f_bavail * (u64)st.f_frsize;
@@ -742,8 +725,9 @@ static void commitToNand(u8* out, size_t outLen){
     consoleUpdate(NULL);
     if (!(waitBtn() & HidNpadButton_A)) return;
 
+    // v0.9.4: Check SD space before backup
     printf("\nStep 0/5: checking SD card space...\n"); consoleUpdate(NULL);
-    if (!checkSDSpace(outLen * 2)) {
+    if (!checkSDSpace(outLen * 2)) { // Need space for both backup and new save
         printf("\nABORTED: Insufficient SD card space.\n");
         pauseA();
         return;
@@ -912,8 +896,7 @@ static void showSlotDetail(u8* slot){
         char nick[13], ot[13];
         readNameSmart(buf + 0x58, 12, nick);
         readNameSmart(buf + 0xF8, 12, ot);
-        u16 internalSpecies = LE16(buf+0x08);
-        u16 species = InternalToNationalDex(internalSpecies); // CONVERT TO NATIONAL DEX FOR LOOKUP
+        u16 species = LE16(buf+0x08);
         u32 exp     = LE32(buf + 0x10);
         u32 pid     = LE32(buf + 0x1C);
         u16 tid     = LE16(buf+0x0C), sid = LE16(buf+0x0E);
@@ -944,7 +927,7 @@ static void showSlotDetail(u8* slot){
         printf("Shiny: %s   TID %06u / SID %06u\n", psv == tsv ? "YES!" : "no", id32 % 1000000, id32 / 1000000);
         printf("Egg: %s\n", ((LE32(buf+0x8C) >> 30) & 1) ? "YES" : "no");
         printf("Checksum: %s%s\n", (u16)sum == chk ? "OK" : "BAD", dirty ? " (heals on B)" : "");
-        printf("\n[X] IVs  [Y] EVs  [A] Nature\n[L] Tera  [R] Shiny  [B] save&back\n");
+        printf("\n[X] IVs  [Y] EVs  [A] Nature\n[L] Tera  [R] Shiny  [ZL] Max IVs (31)\n[B] save&back\n");
         consoleUpdate(NULL);
         u64 k = waitBtn();
         if (k & HidNpadButton_B) break;
@@ -953,6 +936,13 @@ static void showSlotDetail(u8* slot){
                 u32 v; char t[32]; snprintf(t,sizeof(t),"IV %s (0-31)", STATNAMES[i]);
                 if (editU32(t, getIV(buf,i), 31, &v)){ setIV(buf,i,v); dirty = true; }
             }
+        }
+        if (k & HidNpadButton_ZL){
+            for (int i = 0; i < 6; i++) setIV(buf, i, 31);
+            dirty = true;
+            printf("\x1b[2J\x1b[0;0HIVs set to 31!\n[A] back\n");
+            consoleUpdate(NULL);
+            while(!(waitBtn()&HidNpadButton_A)){}
         }
         if (k & HidNpadButton_Y){
             for (int i = 0; i < 6; i++){
@@ -1091,9 +1081,8 @@ static void boxViewer(){
                     if (o+4>box->len || LE32(box->data+o)==0) continue;
                     u8 tmp[PK9_PARTY]; memset(tmp,0,sizeof(tmp)); memcpy(tmp,box->data+o,BOX_STRIDE);
                     decrypt8(tmp,BOX_STRIDE);
-                    u16 internalSp = LE16(tmp+8);
-                    u16 sp = InternalToNationalDex(internalSp); // CONVERT TO NATIONAL DEX FOR LOOKUP
-                    const char* nm = speciesName(sp);
+                    u16 sp=LE16(tmp+8);
+                    const char* nm=speciesName(sp);
                     char fb[16];
                     if(!nm){ snprintf(fb,sizeof(fb),"#%u",sp); nm=fb; }
                     if(containsCI(nm,q)) hits[nh++]=b*SLOTS+s2;
@@ -1108,9 +1097,7 @@ static void boxViewer(){
                         u32 o=(u32)(g*BOX_STRIDE);
                         u8 tmp[PK9_PARTY]; memset(tmp,0,sizeof(tmp)); memcpy(tmp,box->data+o,BOX_STRIDE);
                         decrypt8(tmp,BOX_STRIDE);
-                        u16 intSp = LE16(tmp+8);
-                        u16 natSp = InternalToNationalDex(intSp);
-                        const char* nm = speciesName(natSp);
+                        const char* nm=speciesName(LE16(tmp+8));
                         printf("%s Box %2d Slot %2d  %s\n", (page+i)==sel2?">":" ", g/SLOTS+1, g%SLOTS, nm?nm:"?");
                     }
                     printf("\n^ v select   [A] jump   [B] back\n");
@@ -1191,7 +1178,7 @@ static void boxViewer(){
                     if(k3&HidNpadButton_A){
                         bool zb = containsCI(g_speciesLines[0], "Bulbasaur");
                         pickedSpecies = (u16)(matches[sel3] + (zb ? 1 : 0)); 
-                        pickedSpecies = ClampSpecies(pickedSpecies);
+                        pickedSpecies = ClampSpecies(pickedSpecies); // ONLY clamps, does not convert
                         break;
                     }
                 }
@@ -1290,7 +1277,7 @@ static int gameSelector(){
     int sel = 0;
     while (true){
         printf("\x1b[2J\x1b[0;0H");
-        printf("PKHeX-NX M11 - SELECT GAME\n\n");
+        printf("PKHeX-NX v0.9.4 - SELECT GAME\n\n");
         for (int i = 0; i < GAME_COUNT; i++)
             printf("%s %s %s\n", i==sel ? ">" : " ", GAMES[i].name,
                    g_installed[i] ? "(detected)" : "(not detected)");
@@ -1306,7 +1293,8 @@ static int gameSelector(){
 
 int main(int argc, char** argv){
     consoleInit(NULL); appletLockExit();
-    padConfigureInput(1, HidNpadStyleSet_NpadStandard);
+    padConfigureInput(1, HidNpadStyleSet_NpadStandard); // <--- HID input initialized before guard
+    // ---- Applet Mode guard: refuse to run without Title Override ----
     if (appletGetAppletType() != AppletType_Application) {
         PadState guard_pad;
         padInitializeDefault(&guard_pad);
@@ -1320,18 +1308,19 @@ int main(int argc, char** argv){
         printf("  3. HOLD [R] while pressing [A] to launch it.\n");
         printf("  4. PKHeX-NX will open with full access.\n\n");
         printf("  Press [A] to exit.\n");
-        consoleUpdate(NULL);
+        consoleUpdate(NULL); // Flush initial text to screen
         
         while (appletMainLoop()) {
             padUpdate(&guard_pad);
             if (padGetButtonsDown(&guard_pad) & HidNpadButton_A) break;
-            consoleUpdate(NULL);
-            svcSleepThread(16000000);
+            consoleUpdate(NULL); // Flushes text while waiting
+            svcSleepThread(16000000); // Don't burn CPU while waiting
         }
         appletUnlockExit();
         consoleExit(NULL);
         return 0;
     }
+    // ---- end guard ----
     Result rc = fsInitialize();
     if (R_FAILED(rc)){ printf("FATAL fs 0x%X\n",rc); while(appletMainLoop()) consoleUpdate(NULL); return 1; }
     fsdevMountSdmc();
@@ -1354,10 +1343,13 @@ int main(int argc, char** argv){
 
     detectGames();
 
+    // v0.9.4: Round-Trip Sanity Check (stolen from pkBakery)
+    // Verify encrypt(decrypt(x)) == x before touching any user save data.
     {
         u8 test_buf[344];
         u8 orig_buf[344];
-        memset(test_buf, 0xAA, 344);
+        memset(test_buf, 0xAA, 344); // Fill with known pattern
+        // Set a dummy PID at offset 0 so decrypt8/encrypt8 can read the shuffle value
         WLE32(test_buf, 0x12345678); 
         memcpy(orig_buf, test_buf, 344);
 
@@ -1384,6 +1376,7 @@ int main(int argc, char** argv){
         }
     }
 
+    bool quit_app = false;
     while (true){
         int gi = gameSelector();
         if (gi < 0) break;
@@ -1421,17 +1414,24 @@ int main(int argc, char** argv){
 
         while(true){
             printf("\x1b[2J\x1b[0;0H");
-            printf("PKHeX-NX M11 - %s\n\n", g_game->name);
+            printf("PKHeX-NX v0.9.4 - %s\n\n", g_game->name);
             BlockInfo* ms=findBlock(KMyStatus); BlockInfo* mo=findBlock(KMoney);
             char name[13]={0};
             if(ms){ u32 full=LE32(ms->data); getName(ms,name);
                 printf("Name : %s\nTID  : %06u   SID: %06u\n", name, full%1000000, full/1000000); }
             if(mo) printf("Money: %u\n", LE32(mo->data));
-            printf("\n[A] Name  [B] TID/SID  [X] Money\n[Y] Round-trip test (SD only)  [ZR] Raw dump\n[L] COMMIT TO NAND (backup first)\n[R] Restore newest backup\n[-] Box viewer\n[+] Change game\n");
+            printf("\n[A] Name  [B] TID/SID  [X] Money\n[Y] Round-trip test (SD only)  [ZR] Raw dump\n[L] COMMIT TO NAND (backup first)\n[R] Restore newest backup\n[-] Box viewer\n[+] Change game\n[ZL] Quit App\n");
             consoleUpdate(NULL);
             u64 k=waitBtn();
 
             if (k & HidNpadButton_Plus) break;
+            if (k & HidNpadButton_ZL) {
+                printf("\nExiting to Homebrew Menu...\n");
+                consoleUpdate(NULL);
+                svcSleepThread(500000000); // 0.5s delay
+                quit_app = true;
+                break;
+            }
             if (ms && (k & HidNpadButton_A)){ char nn[13]; if(editName("EDIT NAME",name,nn)) setName(ms,nn); }
             if (ms && (k & HidNpadButton_B)){ u32 full=LE32(ms->data), tid,sid;
                 if(editU32("EDIT TID", full%1000000, 999999, &tid) &&
@@ -1456,6 +1456,7 @@ int main(int argc, char** argv){
             if (k & HidNpadButton_Minus) boxViewer();
             if (k & HidNpadButton_ZR) rawDumpMainBackup();
         }
+        if (quit_app) break;
 
         free(g_blocks); g_blocks=nullptr; g_blockCount=0;
         free(data); data=nullptr;
