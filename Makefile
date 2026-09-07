@@ -32,7 +32,7 @@ INCLUDES    := include
 
 APP_TITLE   := PKHeX-NX
 APP_AUTHOR  := cbreezy210
-APP_VERSION := 0.9.3
+APP_VERSION := 0.9.4
 #---------------------------------------------------------------------------------
 
 ifneq ($(BUILD),$(notdir $(CURDIR)))
