@@ -209,7 +209,7 @@ Safety is the core pillar of this roadmap. Every feature that touches NAND is ga
 * **kwsch & The PKHeX Team:** For the foundational research, cryptography documentation, and the legendary desktop editor that inspired this project. ([GitHub](https://github.com/kwsch/PKHeX))
 * **Switchbrew & devkitPro:** For maintaining the libnx toolchain that makes native Switch homebrew possible. ([Website](https://devkitpro.org))
 * **The GBATemp & r/HomebrewSwitch Communities:** For early testing, hardware validation, and relentless feedback during the beta phase.
-* **Insektaure (pkHouse, pkBakery):** For setting the gold standard in native Switch Pokémon UI/UX and safety patterns.
+* **Insektaure (pkHouse, pkBakery):** For setting the gold standard in native Switch Pokémon UI/UX and safety patterns.([Github]((https://github.com/Insektaure)))
 * **GameBrew:** For hosting the [Install Guide & Documentation Mirror](https://www.gamebrew.org/wiki/PKHeX-NX).
 
 ---
