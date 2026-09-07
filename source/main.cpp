@@ -6,6 +6,7 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/statvfs.h>
 #include <time.h>
 
 const int PK9_PARTY  = 344;
@@ -260,6 +261,7 @@ static bool containsCI(const char* hay, const char* needle){
     }
     return false;
 }
+
 static const char* speciesName(u16 s){
     if(!g_speciesCount) return nullptr;
     bool zeroBased = containsCI(g_speciesLines[0], "Bulbasaur");
@@ -267,6 +269,15 @@ static const char* speciesName(u16 s){
     if(idx>=0 && idx<g_speciesCount && g_speciesLines[idx][0]) return g_speciesLines[idx];
     return nullptr;
 }
+
+// v0.9.4: Species #917 Audit (stolen from PKHeX SpeciesConverter)
+// Prevents Gen 9 corruption bugs (PKSE Issue #107) by strictly validating species IDs.
+static u16 ClampSpecies(u16 species) {
+    if (species < 1) return 1;       // Prevent 0 (None) or negative
+    if (species > 1025) return 1025; // Hard cap at Pecharunt (Gen 9 max)
+    return species;
+}
+
 static bool promptText(const char* title, char* out, size_t cap){
     SwkbdConfig k;
     if (R_FAILED(swkbdCreate(&k, 0))) return false;
@@ -350,6 +361,7 @@ static bool movePicker(u16 species, u16 level, u16* out_moves) {
 }
 
 static void generatePK9(u8* out344, u16 species, u16 level, u8 nature, u8 ball, u32 id32, const char* otName, bool egg, u16* forcedMoves = nullptr){
+    species = ClampSpecies(species); // v0.9.4: Species #917 Audit
     memset(out344, 0, 344);
     if (egg) level = 1;   // eggs are always level 1
 
@@ -470,7 +482,7 @@ struct Sha256 {
         else { buf[i++]=0x80; while(i<64) buf[i++]=0; transform(buf); memset(buf,0,56); }
         bitlen += (u64)datalen*8;
         buf[63]=(u8)bitlen; buf[62]=(u8)(bitlen>>8); buf[61]=(u8)(bitlen>>16); buf[60]=(u8)(bitlen>>24);
-        buf[59]=(u8)bitlen>>32; buf[58]=(u8)(bitlen>>40); buf[57]=(u8)(bitlen>>48); buf[56]=(u8)(bitlen>>56);
+        buf[59]=(u8)(bitlen>>32); buf[58]=(u8)(bitlen>>40); buf[57]=(u8)(bitlen>>48); buf[56]=(u8)(bitlen>>56);
         transform(buf);
         for(int j=0;j<8;j++){ out[j*4]=(u8)(h[j]>>24); out[j*4+1]=(u8)(h[j]>>16); out[j*4+2]=(u8)(h[j]>>8); out[j*4+3]=(u8)h[j]; } }
 };
@@ -573,6 +585,29 @@ static bool writeWhole(const char* path, const u8* buf, size_t len){
 static u32 nowUnix(){ u64 t=0;
     if(R_SUCCEEDED(timeInitialize())){ timeGetCurrentTime(TimeType_LocalSystemClock,&t); timeExit(); }
     return (u32)t; }
+
+// v0.9.4: SD Space Check (stolen from pkBakery)
+static bool checkSDSpace(size_t requiredBytes){
+    struct statvfs st;
+    if (statvfs("sdmc:/", &st) != 0) {
+        printf("\nWARNING: Could not check SD card space.\n");
+        return true; // Don't block if we can't check
+    }
+    
+    u64 freeBytes = (u64)st.f_bavail * (u64)st.f_frsize;
+    u64 requiredMB = (requiredBytes + 1024*1024 - 1) / (1024*1024);
+    u64 freeMB = freeBytes / (1024*1024);
+    
+    if (freeBytes < requiredBytes) {
+        printf("\n!! SD CARD SPACE WARNING !!\n");
+        printf("  Free space: %lu MB\n", freeMB);
+        printf("  Required:   %lu MB\n", requiredMB);
+        printf("  Please free up space on your SD card.\n");
+        return false;
+    }
+    return true;
+}
+
 static bool findLatestBackup(char* outPath, size_t cap){
     DIR* d=opendir("sdmc:/pkhex-nx-backups"); if(!d) return false;
     struct dirent* ent; char best[64]={0};
@@ -654,6 +689,14 @@ static void commitToNand(u8* out, size_t outLen){
     printf("\x1b[2J\x1b[0;0HCOMMIT TO NAND (%s)\n\nMake sure the game is fully closed (not suspended).\n[A] continue   [B] cancel\n", g_game->name);
     consoleUpdate(NULL);
     if (!(waitBtn() & HidNpadButton_A)) return;
+
+    // v0.9.4: Check SD space before backup
+    printf("\nStep 0/5: checking SD card space...\n"); consoleUpdate(NULL);
+    if (!checkSDSpace(outLen * 2)) { // Need space for both backup and new save
+        printf("\nABORTED: Insufficient SD card space.\n");
+        pauseA();
+        return;
+    }
 
     printf("\nStep 1/5: backing up current save to SD...\n"); consoleUpdate(NULL);
     mkdir("sdmc:/pkhex-nx-backups", 0777);
@@ -1092,7 +1135,7 @@ static void boxViewer(){
                     if(k3&HidNpadButton_Down&&sel3<nm-1)sel3++;
                     if(k3&HidNpadButton_A){
                         bool zb = containsCI(g_speciesLines[0], "Bulbasaur");
-                        pickedSpecies = (u16)(matches[sel3] + (zb ? 1 : 0));
+                        pickedSpecies = ClampSpecies((u16)(matches[sel3] + (zb ? 1 : 0))); // v0.9.4: Species #917 Audit
                         break;
                     }
                 }
@@ -1256,6 +1299,39 @@ int main(int argc, char** argv){
     padConfigureInput(1,HidNpadStyleSet_NpadStandard); padInitializeDefault(&g_pad);
 
     detectGames();
+
+    // v0.9.4: Round-Trip Sanity Check (stolen from pkBakery)
+    // Verify encrypt(decrypt(x)) == x before touching any user save data.
+    {
+        u8 test_buf[344];
+        u8 orig_buf[344];
+        memset(test_buf, 0xAA, 344); // Fill with known pattern
+        // Set a dummy PID at offset 0 so decrypt8/encrypt8 can read the shuffle value
+        WLE32(test_buf, 0x12345678); 
+        memcpy(orig_buf, test_buf, 344);
+
+        decrypt8(test_buf, 344);
+        encrypt8(test_buf, 344);
+
+        if (memcmp(orig_buf, test_buf, 344) != 0) {
+            printf("\n\n  !! FATAL CRYPTO ERROR !!\n\n");
+            printf("  Round-trip sanity check failed.\n");
+            printf("  encrypt(decrypt(x)) != x\n\n");
+            printf("  ABORTING to prevent save corruption.\n");
+            printf("  Please report this to cbreezy210.\n\n");
+            printf("  Press [A] to exit.\n");
+            consoleUpdate(NULL);
+            while(appletMainLoop()) {
+                padUpdate(&g_pad);
+                if (padGetButtonsDown(&g_pad) & HidNpadButton_A) break;
+                consoleUpdate(NULL);
+                svcSleepThread(16000000);
+            }
+            appletUnlockExit();
+            consoleExit(NULL);
+            return 1;
+        }
+    }
 
     while (true){
         int gi = gameSelector();
