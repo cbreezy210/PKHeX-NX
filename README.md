@@ -157,8 +157,8 @@ This produces `stats.txt`, `abilities.txt`, `growth.txt`, `learnsets.bin`, `pp.t
 * **kwsch and the PKHeX project** — foundational save-structure research, cryptography documentation, and the legendary desktop editor: https://github.com/kwsch/PKHeX
 * **devkitPro and libnx communities** — Switch homebrew tooling: https://devkitpro.org
 * **The GBATemp & r/HomebrewSwitch communities** — for early testing, hardware validation, and relentless feedback
-* **Insektaure (pkHouse, pkBakery)** — for setting the gold standard in native Switch Pokémon UI/UX and safety patterns
-* **GameBrew** — for hosting the Install Guide & Documentation Mirror
+* **Insektaure (pkHouse, pkBakery)** — for setting the gold standard in native Switch Pokémon UI/UX and safety patterns: https://github.com/Insektaure
+* **GameBrew** — for hosting the Install Guide & Documentation Mirror: https://www.gamebrew.org/PKHeX-NX
 
 ## ⚖️ Disclaimer
 This is an educational project. Always keep backups of your save files. Modifying save data always carries a risk. I am not responsible for corrupted saves, lost Pokémon, or banned consoles. Use at your own risk!
