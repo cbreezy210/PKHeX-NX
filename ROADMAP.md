@@ -103,9 +103,16 @@ Every generated Pokémon is now 100% legal, level-accurate, and fully customizab
 ## ✅ Shipped — v0.9.4 (Stability & Hardening Sprint)
 Bulletproofing the core architecture for the v1.0 transition.
 
-- [x] **Paldean Native Species Fix (Species #917 Audit):** Strict species ID clamping (1-1025) to prevent Gen 9 "Bad Egg" corruption bugs, directly addressing the issues seen in competing tools.
+- [x] **Paldean Native Species Fix (Species #917 Audit):** Full PKHeX SpeciesConverter port with bidirectional delta tables, permanently fixing the "Dunsparce/Spidops imposter" bug for Paldean species (#917+).
 - [x] **SD Card Space Validation:** Checks available SD card space before creating backups to prevent mid-write corruption.
 - [x] **Round-Trip Crypto Verification:** Mathematically verify the parser on boot (encrypt(decrypt(x)) == x) to guarantee data integrity before any editing begins.
+
+##✅ Shipped — v0.9.5 (Quality of Life Update)
+Polishing the user experience with high-requested convenience features.
+
+- [x] **Main Menu Version Display:** Header now explicitly shows the current version (e.g., v0.9.5) so users know they are up to date.
+- [x] **Graceful Quit ([ZL]):** Added a dedicated "Quit App" button on the main menu for a clean exit back to the Homebrew Menu.
+- [x] **Max IVs Shortcut ([ZL] in Slot Editor):** Instantly set all 6 IVs to 31 with a single button press, streamlining competitive prep.
 
 ## 🟢 Coming Next — v1.0.0 (The Multi-Game & Content Expansion)
 *Target Release: Late 2026*
