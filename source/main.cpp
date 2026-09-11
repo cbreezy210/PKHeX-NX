@@ -1277,7 +1277,7 @@ static int gameSelector(){
     int sel = 0;
     while (true){
         printf("\x1b[2J\x1b[0;0H");
-        printf("PKHeX-NX v0.9.4 - SELECT GAME\n\n");
+        printf("PKHeX-NX v0.9.5 - SELECT GAME\n\n");
         for (int i = 0; i < GAME_COUNT; i++)
             printf("%s %s %s\n", i==sel ? ">" : " ", GAMES[i].name,
                    g_installed[i] ? "(detected)" : "(not detected)");
@@ -1414,7 +1414,7 @@ int main(int argc, char** argv){
 
         while(true){
             printf("\x1b[2J\x1b[0;0H");
-            printf("PKHeX-NX v0.9.4 - %s\n\n", g_game->name);
+            printf("PKHeX-NX v0.9.5 - %s\n\n", g_game->name);
             BlockInfo* ms=findBlock(KMyStatus); BlockInfo* mo=findBlock(KMoney);
             char name[13]={0};
             if(ms){ u32 full=LE32(ms->data); getName(ms,name);
