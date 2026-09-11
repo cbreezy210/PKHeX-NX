@@ -5,7 +5,7 @@ A 100% native Nintendo Switch homebrew application for editing Pokémon save fil
 
 [![Version](https://img.shields.io/github/v/release/cbreezy210/PKHeX-NX?include_prereleases)](https://github.com/cbreezy210/PKHeX-NX/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-> **Note:** This is an active public beta (v0.9.4) and an educational project. Always keep backups of your save files. Modifying save data always carries a risk. The author is not responsible for corrupted saves, lost Pokémon, or banned consoles. Use offline and at your own risk. Not affiliated with Nintendo, Game Freak, or The Pokémon Company.
+> **Note:** This is an active public beta (v0.9.5) and an educational project. Always keep backups of your save files. Modifying save data always carries a risk. The author is not responsible for corrupted saves, lost Pokémon, or banned consoles. Use offline and at your own risk. Not affiliated with Nintendo, Game Freak, or The Pokémon Company.
 >
 > **Responsible Use:** This app is built for offline, single-player enjoyment and research. Please do not use edited Pokémon in online multiplayer, official tournaments, or ranked battles, and do not distribute edited saves or Pokémon as your own work.
 
@@ -21,7 +21,10 @@ For full memory and SD card access, you **MUST** launch this app via **Title Ove
 
 **Do NOT launch it from the Album / Applet mode** — the app will refuse to run and show you exactly how to relaunch correctly, preventing save-access crashes!
 
-## ✨ Features (v0.9.4)
+## ✨ Features (v0.9.5)
+* **Main Menu Version Display:** The header now explicitly shows the current app version (e.g., v0.9.5), so you always know which build you're running.
+* **Graceful Quit:** Press `[ZL]` on the main menu to cleanly exit the app back to the Homebrew Menu (no more force-closing via the Home button).
+* **Max IVs Shortcut:** Press `[ZL]` in the slot editor to instantly set all 6 IVs to 31 with a single button press.
 * **Native Switch Execution:** Edits decrypted save data directly in RAM and writes back to NAND securely.
 * **Multi-Game Framework:** Boot-time selector auto-detects installed Scarlet & Violet saves.
 * **Military-Grade Safety Net:** Automatic byte-verified SD card backups before every single write, a dual-file commit protocol (writes to both main and backup to prevent stale fallbacks), and one-button emergency rollback.
@@ -47,7 +50,7 @@ sdmc:/pkhex-nx-backups/SC_main_YYYYMMDD_HHMMSS.bak   (Scarlet)
 sdmc:/pkhex-nx-backups/VI_main_YYYYMMDD_HHMMSS.bak   (Violet)
 ```
 
-**One-Button Rollback:** Press [ZL] on the main menu to instantly restore from your newest timestamped backup.
+**One-Button Rollback:** Press [R] on the main menu to instantly restore from your newest timestamped backup.
 
 **Safety Guarantees:**
 * Every save operation creates a byte-verified backup *before* writing to NAND
@@ -70,14 +73,14 @@ sdmc:/pkhex-nx-backups/VI_main_YYYYMMDD_HHMMSS.bak   (Violet)
 Tested by the author on FW 22.5.0 (Atmosphère 1.11.2 E). When Nintendo ships a Pokémon update, compatibility is re-verified and noted in the changelog.
 
 ## 🎨Coming in v1.0: The Big Content Expansion
-Based on your feedback! Now that v0.9.4 has locked in our hardening sprint (SD Space Validation, Round-Trip Crypto Verification, and Species #917+ Audit), v1.0 brings the big content expansion. We are currently deciding between prioritizing the **Bag/Item Editor** or **Pokédex Auto-Registration** first — which would you rather see? Let us know on GitHub Discussions!
+Based on your feedback! Now that v0.9.4 (Hardening Sprint) and v0.9.5 (QoL) are live, v1.0 brings the big content expansion. We are currently deciding between prioritizing the **Bag/Item Editor** or **Pokédex Auto-Registration** first — which would you rather see? Let us know on GitHub Discussions!
 
 ## 📥 Installation
 Ensure your Switch is running Custom Firmware (Atmosphère).
 
 ### Standard Installation (SD Card)
 
-1. Download the latest `PKHeX-NX-Beta-v0.9.4.zip` from the [Releases](https://github.com/cbreezy210/PKHeX-NX/releases) page.
+1. Download the latest `PKHeX-NX-Beta-v0.9.5.zip` from the [Releases](https://github.com/cbreezy210/PKHeX-NX/releases) page.
 2. Extract the contents directly to the **root** of your SD card. This creates the following structure:
 
 ```text
@@ -105,7 +108,7 @@ Ensure your Switch is running Custom Firmware (Atmosphère).
 
 For users with DBI installed on their Switch, or once approved on the Homebrew App Store:
 
-1. Download `PKHeX-NX-DBI-v0.9.4.zip` from the [Releases](https://github.com/cbreezy210/PKHeX-NX/releases) page.
+1. Download `PKHeX-NX-DBI-v0.9.5.zip` from the [Releases](https://github.com/cbreezy210/PKHeX-NX/releases) page.
 2. Install the `.nro` via DBI (MTP responder or network), or grab it from the Homebrew App Store.
 3. Ensure the `pkhex-nx-assets/` folder is on your SD card root (see structure above).
 4. Launch via Title Override (hold [R] on Pokémon Scarlet/Violet from the Home Menu).
@@ -118,15 +121,15 @@ For users with DBI installed on their Switch, or once approved on the Homebrew A
 | **B** | Back / Cancel |
 | **X** | Clone selected Pokémon |
 | **Y** | Delete selected Pokémon / Pick Moves (in Generator) |
-| **ZL** | Inject from .pk9 (box viewer) / Emergency rollback (main menu) |
+| **ZL** | Inject from .pk9 (box viewer) / Graceful Quit (main menu) / Max IVs (slot editor) |
 | **ZR** | Export to .pk9 |
-| **L / R** | Change Box |
+| **L / R** | Change Box (Press [R] on main menu for Emergency Rollback) |
 | **+** | Search species / Change game |
 
 ## 🗺️ Roadmap & Known Gaps
 See [ROADMAP.md](ROADMAP.md) for the full list of shipped and planned features.
 
-**Known Gaps (v0.9.4):**
+**Known Gaps (v0.9.5):**
 * Text-only developer console UI; full SDL2 graphical UI planned for v1.0
 * No Bag/Item editing yet (planned for v1.0)
 * No Pokédex registration yet (planned for v1.0)
