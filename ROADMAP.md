@@ -23,7 +23,7 @@ PKHeX-NX Development Phases
 │   ├── Gen 8 & Z-A Codecs
 │   ├── Bag Editor & Items
 │   └── Pokédex & Legality Automation
-── Phase 3: UI Overhaul (v1.1.x) 🟠
+├── Phase 3: UI Overhaul (v1.1.x) 🟠
 │   ├── SDL2 Graphical Renderer
 │   └── Touch & Highlight Navigation
 └── Phase 4: Deep Edits & Community (v2.0.x) 🔴
@@ -107,7 +107,7 @@ Bulletproofing the core architecture for the v1.0 transition.
 - [x] **SD Card Space Validation:** Checks available SD card space before creating backups to prevent mid-write corruption.
 - [x] **Round-Trip Crypto Verification:** Mathematically verify the parser on boot (encrypt(decrypt(x)) == x) to guarantee data integrity before any editing begins.
 
-##✅ Shipped — v0.9.5 (Quality of Life Update)
+## ✅ Shipped — v0.9.5 (Quality of Life Update)
 Polishing the user experience with high-requested convenience features.
 
 - [x] **Main Menu Version Display:** Header now explicitly shows the current version (e.g., v0.9.5) so users know they are up to date.
@@ -140,7 +140,6 @@ Polishing the user experience with high-requested convenience features.
 ### 🎨 UI & Graphics
 - [ ] **Full Graphical UI:** SDL2 renderer replaces the text console (themed header, logo, crisp TTF text).
 - [ ] **Highlight-Bar Navigation:** Clean, centered layout to prevent text overflow.
-- [ ] **Graceful App Exit:** Dedicated "Quit App" option in the main menu.
 
 ### 🛡️ Safety & Reliability
 - [ ] **"Dry Run" Preview Mode:** See exactly what will change before writing to NAND.
