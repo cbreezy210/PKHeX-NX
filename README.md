@@ -1,5 +1,10 @@
-# 🎮 PKHeX-NX (Native Switch Pokémon Save Editor)
-**The Pokémon SV companion tool that never leaves your Switch.**
+# PKHeX-NX 🎮
+
+**The first 100% native Switch save editor for Pokémon Scarlet & Violet.**
+
+> **🚀 Status:** Public Beta (v0.9.5) - actively hardening. Part of the 1,000+ combined downloads milestone across the native portfolio.
+
+> **🛡️ Safety Record:** Byte-verified backups + dual-file commit protocol + boot-time crypto sanity checks.
 
 ![Status](https://img.shields.io/badge/Status-Public%20Beta-blueviolet?style=flat-square)
 ![Platform](https://img.shields.io/badge/Platform-Nintendo%20Switch-E60012?style=flat-square&logo=nintendo-switch&logoColor=white)
@@ -7,7 +12,9 @@
 ![License](https://img.shields.io/github/license/cbreezy210/PKHeX-NX?style=flat-square&color=blue)
 [![Latest Release](https://img.shields.io/github/v/release/cbreezy210/PKHeX-NX?include_prereleases&style=flat-square&color=blueviolet)](https://github.com/cbreezy210/PKHeX-NX/releases) [![Total Downloads](https://img.shields.io/github/downloads/cbreezy210/PKHeX-NX/total?style=flat-square&color=orange)](https://github.com/cbreezy210/PKHeX-NX/releases)
 
-**Public Beta & actively hardening:** The first 100% native Switch save editor for Pokémon Scarlet & Violet (Gen 9) — no PC, no save dumping, no bridges. v0.9.5 QoL sprint live; part of the 1,000+ combined downloads milestone across the native save editor portfolio.
+> **Note:** This is an active public beta (v0.9.5) and an educational project. Always keep backups of your save files. Modifying save data always carries a risk. The author is not responsible for corrupted saves, lost Pokémon, or banned consoles. Use offline and at your own risk. Not affiliated with Nintendo, Game Freak, or The Pokémon Company.
+>
+> **Responsible Use:** This app is built for offline, single-player enjoyment and research. Please do not use edited Pokémon in online multiplayer, official tournaments, or ranked battles, and do not distribute edited saves or Pokémon as your own work.
 
 🔬 **Reverse Engineering Highlights:**
 - Cracked the Gen 9 SCBlock/SCXorShift32 save structure with SHA256 footer verification and 127-byte xorpad decryption (SwishCrypto Engine)
@@ -18,10 +25,6 @@
 📖 [GameBrew Wiki](https://www.gamebrew.org/wiki/PKHeX-NX)
 
 💬 [GBATemp Release Thread](https://gbatemp.net/threads/pkhex-nx-native-switch-pokemon-save-editor-scarlet-violet-devlog-sneak-peek.683964/)
-
-> **Note:** This is an active public beta (v0.9.5) and an educational project. Always keep backups of your save files. Modifying save data always carries a risk. The author is not responsible for corrupted saves, lost Pokémon, or banned consoles. Use offline and at your own risk. Not affiliated with Nintendo, Game Freak, or The Pokémon Company.
->
-> **Responsible Use:** This app is built for offline, single-player enjoyment and research. Please do not use edited Pokémon in online multiplayer, official tournaments, or ranked battles, and do not distribute edited saves or Pokémon as your own work.
 
 ## 🎯 What This App Is
 | PKHeX-NX IS: | PKHeX-NX IS NOT: |
