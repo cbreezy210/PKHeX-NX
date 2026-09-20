@@ -1,4 +1,4 @@
-# PKHeX-NX 🎮
+# PKHeX-NX 🔴⚪️
 
 **The first 100% native Switch save editor for Pokémon Scarlet & Violet.**
 
