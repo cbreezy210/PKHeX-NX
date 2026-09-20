@@ -3,7 +3,11 @@
 
 A 100% native Nintendo Switch homebrew application for editing Pokémon save files (Gen 9: Scarlet & Violet) directly on your console. No PC, no pulling the SD card, no complicated dumping tools required.
 
-[![Version](https://img.shields.io/github/v/release/cbreezy210/PKHeX-NX?include_prereleases)](https://github.com/cbreezy210/PKHeX-NX/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+![Status](https://img.shields.io/badge/Status-Public%20Beta-blueviolet?style=flat-square)
+![Platform](https://img.shields.io/badge/Platform-Nintendo%20Switch-E60012?style=flat-square&logo=nintendo-switch&logoColor=white)
+![Language](https://img.shields.io/badge/Language-C++-00599C?style=flat-square&logo=c%2B%2B&logoColor=white)
+![License](https://img.shields.io/github/license/cbreezy210/PKHeX-NX?style=flat-square&color=blue)
+[![Latest Release](https://img.shields.io/github/v/release/cbreezy210/PKHeX-NX?include_prereleases&style=flat-square&color=blueviolet)](https://github.com/cbreezy210/PKHeX-NX/releases) [![Total Downloads](https://img.shields.io/github/downloads/cbreezy210/PKHeX-NX/total?style=flat-square&color=orange)](https://github.com/cbreezy210/PKHeX-NX/releases)
 
 > **Note:** This is an active public beta (v0.9.5) and an educational project. Always keep backups of your save files. Modifying save data always carries a risk. The author is not responsible for corrupted saves, lost Pokémon, or banned consoles. Use offline and at your own risk. Not affiliated with Nintendo, Game Freak, or The Pokémon Company.
 >
