@@ -1,13 +1,23 @@
 # 🎮 PKHeX-NX (Native Switch Pokémon Save Editor)
 **The Pokémon SV companion tool that never leaves your Switch.**
 
-A 100% native Nintendo Switch homebrew application for editing Pokémon save files (Gen 9: Scarlet & Violet) directly on your console. No PC, no pulling the SD card, no complicated dumping tools required.
-
 ![Status](https://img.shields.io/badge/Status-Public%20Beta-blueviolet?style=flat-square)
 ![Platform](https://img.shields.io/badge/Platform-Nintendo%20Switch-E60012?style=flat-square&logo=nintendo-switch&logoColor=white)
 ![Language](https://img.shields.io/badge/Language-C++-00599C?style=flat-square&logo=c%2B%2B&logoColor=white)
 ![License](https://img.shields.io/github/license/cbreezy210/PKHeX-NX?style=flat-square&color=blue)
 [![Latest Release](https://img.shields.io/github/v/release/cbreezy210/PKHeX-NX?include_prereleases&style=flat-square&color=blueviolet)](https://github.com/cbreezy210/PKHeX-NX/releases) [![Total Downloads](https://img.shields.io/github/downloads/cbreezy210/PKHeX-NX/total?style=flat-square&color=orange)](https://github.com/cbreezy210/PKHeX-NX/releases)
+
+**Public Beta & actively hardening:** The first 100% native Switch save editor for Pokémon Scarlet & Violet (Gen 9) — no PC, no save dumping, no bridges. v0.9.5 QoL sprint live; part of the 1,000+ combined downloads milestone across the native save editor portfolio.
+
+🔬 **Reverse Engineering Highlights:**
+- Cracked the Gen 9 SCBlock/SCXorShift32 save structure with SHA256 footer verification and 127-byte xorpad decryption (SwishCrypto Engine)
+- Ported the PKHeX `SpeciesConverter` to fix the Paldean ID divergence (Tarountula #917+), eliminating the "Dunsparce imposter" bug and preventing "Bad Egg" corruption
+- Built a legality-aware generator: real abilities, manual legal move picker (pulled from real learnsets), growth-correct EXP across all 6 curves, and a 26-ball picker with correct in-game IDs
+- Implemented the byte-verified backup + dual-file commit safety pipeline, alongside boot-time crypto sanity checks, SD space validation, and hard Applet-mode memory guards
+
+📖 [GameBrew Wiki](https://www.gamebrew.org/wiki/PKHeX-NX)
+
+💬 [GBATemp Release Thread](https://gbatemp.net/threads/pkhex-nx-native-switch-pokemon-save-editor-scarlet-violet-devlog-sneak-peek.683964/)
 
 > **Note:** This is an active public beta (v0.9.5) and an educational project. Always keep backups of your save files. Modifying save data always carries a risk. The author is not responsible for corrupted saves, lost Pokémon, or banned consoles. Use offline and at your own risk. Not affiliated with Nintendo, Game Freak, or The Pokémon Company.
 >
