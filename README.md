@@ -130,7 +130,7 @@ For users with DBI installed on their Switch, or once approved on the Homebrew A
 3. Ensure the `pkhex-nx-assets/` folder is on your SD card root (see structure above).
 4. Launch via Title Override (hold [R] on Pokémon Scarlet/Violet from the Home Menu).
 
-## 🎮 Controls
+## 🎮 Usage & Controls
 | Button | Action |
 |---|---|
 | **D-Pad** | Navigate boxes, slots, and menus |
@@ -224,6 +224,7 @@ Contributions welcome! The most useful ways to help:
 - **Report issues** with the 5-answer checklist from Troubleshooting (tool + version, install type, what didn't stick, error vs. silent revert, game fully closed?).
 - **Save-format research:** PRs with verified offsets/checksums - include your diff method and dump tooling.
 - **Docs & accessibility guides:** wiki improvements and walkthroughs (micaturtle's accessibility guide set the bar!).
+
 Open an issue before large refactors so we can align on scope.
 
 ## 🙏 Credits
