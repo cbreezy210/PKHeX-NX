@@ -214,10 +214,10 @@ This produces `stats.txt`, `abilities.txt`, `growth.txt`, `learnsets.bin`, `pp.t
 
 ---
 
-## 🔗 Explore More Projects
-- 🏠 **[cbreezy210 Main Profile](https://github.com/cbreezy210)** – See all my tools, AI projects, and community updates.
-- 💩 **[TimeStranger-NX](https://github.com/cbreezy210/TimeStranger-NX)** – Native Digimon Story: Time Stranger Save Editor.
-- 🍃 **[ACNH-Save-Editor](https://github.com/cbreezy210/ACNH-Save-Editor)** – Native Animal Crossing companion tool.
+## 🔗 Explore the Native Switch Ecosystem
+- 🏠 **[cbreezy210 Main Profile](https://github.com/cbreezy210)** – See my AI projects, developer tools, and community updates.
+- 🍃 **[ACNH-Save-Editor](https://github.com/cbreezy210/ACNH-Save-Editor)** – Native Animal Crossing companion tool. Wallet, Bank & Loan edits.
+- 💩 **[TimeStranger-NX](https://github.com/cbreezy210/TimeStranger-NX)** – Native Digimon Story: Time Stranger Save Editor (In Development).
 
 ## 🤝 Contributing
 Contributions welcome! The most useful ways to help:
