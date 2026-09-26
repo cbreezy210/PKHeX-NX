@@ -1,6 +1,6 @@
 # PKHeX-NX 🔴⚪️
 
-**The first 100% native Switch save editor for Pokémon Scarlet & Violet.**
+**A 100% native Switch save editor for Pokémon Scarlet & Violet — built with open-source C++, byte-verified backups, and dual-file commit safety.**
 
 ![Status](https://img.shields.io/badge/Status-Public%20Beta-blueviolet?style=flat-square)
 ![Platform](https://img.shields.io/badge/Platform-Nintendo%20Switch-E60012?style=flat-square&logo=nintendo-switch&logoColor=white)
