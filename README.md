@@ -156,7 +156,7 @@ See [ROADMAP.md](ROADMAP.md) for the full list of shipped and planned features.
 If your changes vanish after jumping back into the game, work this checklist top to bottom — it resolves the vast majority of cases.
 
 ### 0. First: breathe, your save is probably fine
-Both editors write a byte-verified backup before every change. If anything looks wrong, restore the backup (ACNH: **ZL** on the ready screen; PKHeX-NX: follow the on-screen restore prompt) and start over. Nothing below is worth risking a save over.
+Both editors write a byte-verified backup before every change. If anything looks wrong, restore the backup - PKHeX-NX: follow the on-screen restore prompt) and start over. Nothing below is worth risking a save over.
 
 ### 1. Fully close the game before editing — the #1 cause
 A **suspended** game keeps its save state in memory. Edit while it's suspended (or resume a suspended session after editing) and the game writes its in-memory state back over your changes on the next autosave. It looks exactly like "my edits didn't stick."
@@ -164,7 +164,6 @@ A **suspended** game keeps its save state in memory. Edit while it's suspended (
 
 ### 2. Make sure you actually committed
 Edits live in the editor's memory until you run the step that writes them to the save file.
-- **ACNH Save Editor:** use the on-screen **Save/Quit** step (A). Exiting any other way discards your changes.
 - **PKHeX-NX:** complete the commit step and exit via **graceful quit** (v0.9.5+). Killing the applet mid-edit writes nothing.
 
 Not sure you committed? Reopen the editor: if the edited values aren't there, they were never written.
@@ -173,12 +172,10 @@ Not sure you committed? Reopen the editor: if the edited values aren't there, th
 The DBI workflow is export → edit the SD dump → **import back**. Editing the dump and launching the game without re-importing leaves the console save untouched. (Standard / Title-Override builds write in place and have no such step.)
 
 ### 4. Check you edited the right target
-- **ACNH:** v1.4.0 edits the **primary resident's** wallet only — if you're playing as a different resident, wallet changes won't appear in your game (the resident selector arrives in v1.6). Bank and loan are island-wide, so those always apply.
 - **PKHeX-NX:** confirm the right box/slot — and remember multiple Switch profiles mean multiple save files.
 
 ### 5. Check your version
 - **PKHeX-NX:** the header prints the version (v0.9.5+). No version line = pre-0.9.5 build → update.
-- **ACNH:** version shows on the title screen.
 
 Older builds predate commit and safety fixes. Always reproduce on the latest release.
 
